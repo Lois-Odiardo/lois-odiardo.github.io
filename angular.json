@@ -41,6 +41,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
+            "baseHref": "/Lois-Odiardo.github.io/",
             "outputPath": "dist/first-app",
             "index": "src/index.html",
             "browser": "src/main.ts",
