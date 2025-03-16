@@ -1,16 +1,22 @@
-import {Component} from '@angular/core';
-import {HomeComponent} from './home/home.component';
-import {RouterLink, RouterOutlet} from '@angular/router';
+import { Component } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
+
 @Component({
   selector: 'app-root',
-  imports: [HomeComponent, RouterLink, RouterOutlet],
+  imports: [RouterLink, RouterOutlet],
   template: `
     <main>
-      <a [routerLink]="['/']">
-        <header class="brand-name">
-          <img class="brand-logo" src="/assets/logo.svg" alt="logo" aria-hidden="true" />
-        </header>
-      </a>
+      <header class="brand-name">
+        <nav class="navbar">
+          <ul>
+            <li><a [routerLink]="['/']">Accueil</a></li>
+            <li><a [routerLink]="['/about']">À propos de moi</a></li>
+            <li><a [routerLink]="['/projects']">Projets</a></li>
+            <li><a [routerLink]="['/learn']">Apprentissages</a></li>
+          </ul>
+        </nav>
+      </header>      
+      <!-- Section principale pour le contenu -->
       <section class="content">
         <router-outlet></router-outlet>
       </section>
@@ -19,5 +25,5 @@ import {RouterLink, RouterOutlet} from '@angular/router';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-  title = 'homes';
+  title = 'portfolio';
 }
