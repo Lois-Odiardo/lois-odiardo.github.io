@@ -3,6 +3,7 @@ import {HomeComponent} from './home/home.component';
 import {DetailsComponent} from './details/details.component';
 import {AboutComponent} from './about-component/about.component';
 import {LearnComponent} from './learn-component/learn.component';
+import {ProjectListComponent} from './project-list/project-list.component'
 
 
 const routeConfig: Routes = [
@@ -20,9 +21,14 @@ const routeConfig: Routes = [
         component: LearnComponent
     },
     {
+        path: 'projects',
+        component: ProjectListComponent,
+        title: 'Mes projets',
+    },
+    {
         path: 'details/:id',
         component: DetailsComponent,
-        title: 'Home details',
+        title: 'Details projet',
     },
 ];
 export default routeConfig;

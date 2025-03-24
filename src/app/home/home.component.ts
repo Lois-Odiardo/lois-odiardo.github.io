@@ -1,42 +1,27 @@
 import {Component, inject} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {HousingLocationComponent} from '../housing-location/housing-location.component';
-import {HousingLocation} from '../housinglocation';
-import {HousingService} from '../housing.service';
+import { RouterModule } from '@angular/router';
+
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, HousingLocationComponent],
+  imports: [CommonModule, RouterModule],
   template: `
-    <section>
-      <form>
-        <input type="text" placeholder="Filter by city" #filter />
-        <button class="primary" type="button" (click)="filterResults(filter.value)">Search</button>
-      </form>
+    <section class="presentation-container">
+      <div class="presentation-content">
+        <h1>Bienvenue dans mon portfolio</h1>
+        <p>
+          Je suis ravi de vous partager mon travail et vous en faire apprendre un peu plus sur moi.
+          Vous retrouverez mes projets les plus récents et représentatifs dans la section
+          <a routerLink="/projects">Projets</a> du menu, mon histoire dans la section
+          <a routerLink="/about">À propos</a> et également les moyens de me contacter dans la section
+          <a routerLink="/contact">Contact</a>.
+        </p>
+      </div>
     </section>
-    <section class="results">
-      <app-housing-location
-          *ngFor="let housingLocation of filteredLocationList"
-          [housingLocation]="housingLocation"
-      ></app-housing-location>
-    </section>
+
   `,
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent {
-  housingLocationList: HousingLocation[] = [];
-  housingService: HousingService = inject(HousingService);
-  filteredLocationList: HousingLocation[] = [];
-  constructor() {
-    this.housingLocationList = this.housingService.getAllHousingLocations();
-    this.filteredLocationList = this.housingLocationList;
-  }
-  filterResults(text: string) {
-    if (!text) {
-      this.filteredLocationList = this.housingLocationList;
-      return;
-    }
-    this.filteredLocationList = this.housingLocationList.filter((housingLocation) =>
-        housingLocation?.city.toLowerCase().includes(text.toLowerCase()),
-    );
-  }
+
 }

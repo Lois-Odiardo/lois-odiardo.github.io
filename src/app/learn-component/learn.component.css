@@ -1,0 +1,77 @@
+/* Global Styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+section {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+span.blue {
+    font-size: 1.2em;
+    color: #00796b;
+    font-weight: bold;
+}
+
+/* Titres des sections */
+/* Titres des sections (AC 1, AC 2, etc.) */
+
+
+
+/* Conteneur des boutons */
+div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-bottom: 20px;
+    justify-content: flex-start;
+}
+
+/* Boutons */
+div > .button {
+    background-color: #00796b;
+    color: white;
+    padding: 12px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    min-width: 150px;
+    flex: 1 1 auto; /* Ajustement flexible pour éviter les retours à la ligne */
+    text-align: center;
+    white-space: nowrap; /* Empêche la coupure du texte */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+div > .button:hover {
+    background-color: #004d40;
+}
+
+div > .button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 150, 136, 0.7);
+}
+
+/* Ajustements pour mobiles */
+@media (max-width: 768px) {
+    div {
+        flex-direction: column;
+    }
+
+    div > .button {
+        width: 100%;
+        min-width: auto; /* Pour éviter les problèmes de largeur sur petits écrans */
+    }
+}
