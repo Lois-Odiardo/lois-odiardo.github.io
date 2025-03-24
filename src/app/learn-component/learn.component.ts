@@ -12,22 +12,22 @@ import {HousingLocation} from "../housinglocation";
     <section>
       <span class="blue">Partie Réaliser :</span>
       <br><strong>AC 1 : </strong>Choisir et implémenter des architectures adaptées
-      <p>La réalisation de mes projets <strong>Exige - new front</strong>,<strong>E::cclesia</strong> et <strong>Nyavigator</strong> ont nécessité la mise en place d'une architecture PHP adapté, que ce soit pour la gestion d'utilisateur ou de leur méthodes métiers.</p>
+      <p>La réalisation de mes projets <strong>Exige - new front</strong>, <strong>E:cclesia</strong> et <strong>Nyavigator</strong> ont nécessité la mise en place d'une architecture PHP adaptée, que ce soit pour la gestion d'utilisateur ou de leurs méthodes métiers.</p>
       <div>
         <button class="button" onclick="location.href='/details/2'">Exige - new front</button>
-        <button class="button" onclick="location.href='/details/5'">E::cclesia</button>
+        <button class="button" onclick="location.href='/details/5'">E:cclesia</button>
         <button class="button" onclick="location.href='/details/7'">Nyavigator</button>
       </div><br>
 
       <br><strong>AC 2 : </strong>Faire évoluer une application existante
-      <p>Mes projets <strong>Exige - new front</strong> ainsi que mon <strong>Alternance</strong> on consisté respectivement en la modernisation d'une application et la correction et amélioration continue des logiciels de l'entreprise Lundi Matin.</p>
+      <p>Mes projets <strong>Exige - new front</strong> ainsi que mon <strong>Alternance</strong> ont consisté respectivement en la modernisation d'une application, et la correction et amélioration continue des logiciels de l'entreprise LUNDI MATIN.</p>
       <div>
         <button class="button" onclick="location.href='/details/2'">Exige - new front</button>
-        <button class="button" onclick="location.href='/details/3'">Alternance</button>
+        <button class="button" onclick="location.href='/details/3'">Alternance 2023-24</button>
       </div><br>
 
       <br><strong>AC 3 : </strong>Intégrer des solutions dans un environnement de production
-      <p>L'objectif de <strong>Nyavigator</strong> était d'intégrer un algorithme de recherche de chemin le plus court et d'en améloiorer ses performances. Il entre parfaitement dans le cadre de cette compétence.</p>
+      <p>L'objectif de <strong>Nyavigator</strong> était d'intégrer un algorithme de recherche de chemin le plus court et d'en améliorer ses performances. Il entre parfaitement dans le cadre de cette compétence.</p>
       <div>
         <button class="button" onclick="location.href='/details/7'">Nyavigator</button>
       </div><br>
@@ -37,7 +37,6 @@ import {HousingLocation} from "../housinglocation";
       <p>Le projet <strong>Nyavigator</strong>, qui visait à optimiser une application de calcul de trajet, impliquait l’analyse des performances et l’optimisation des temps de réponse.</p>
       <div>
         <button class="button" onclick="location.href='/details/7'">Nyavigator</button>
-        <button class="button" onclick="location.href='/details/1'">Autocompletion Scala</button>
       </div><br>
 
       <br><strong>AC 5 : </strong>Profiler, analyser et justifier le comportement d’un code existant
@@ -55,7 +54,7 @@ import {HousingLocation} from "../housinglocation";
 
       <span class="blue">Partie Collaborer :</span>
       <br><strong>AC 7 : </strong>Organiser et partager une veille numérique
-      <p>Mon <strong>Alternance 2023-24</strong> a impliqué une veille sur les technologies utilisées par mon entreprise, pour me permettre de corriger les bugs pouvant apparaitre lors d'un changemnet de version d'une des technologies.</p>
+      <p>Mon <strong>Alternance 2023-24</strong> a impliqué une veille sur les technologies utilisées par mon entreprise, pour me permettre de corriger les bugs pouvant apparaître lors d'un changement de version d'une des technologies.</p>
       <div>
         <button class="button" onclick="location.href='/details/3'">Alternance 2023-24</button>
       </div><br>
