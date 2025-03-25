@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     <section class="about-container">
       <div class="bio-section">
         <div class="bio-image">
-          <img src="assets/scala.png" alt="Photo de Loïs Odiardo" class="profile-pic">
+          <img src="assets/Lois Odiardo.jpg" alt="Photo de Loïs Odiardo" class="profile-pic">
         </div>
 
         <div class="biography">

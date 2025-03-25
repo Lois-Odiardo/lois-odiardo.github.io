@@ -14,6 +14,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
         <nav>
           <ul class="nav-links">
             <li><a [routerLink]="['/']">Accueil</a></li>
+            <li><a [routerLink]="['/contact']">Contact</a></li>
             <li><a [routerLink]="['/about']">À propos</a></li>
             <li><a [routerLink]="['/projects']">Projets</a></li>
             <li><a [routerLink]="['/learn']">Apprentissages</a></li>

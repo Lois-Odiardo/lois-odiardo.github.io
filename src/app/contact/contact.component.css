@@ -1,0 +1,65 @@
+.contact-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.contact-container h2 {
+    color: #333;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+}
+
+/* Liste des contacts */
+.contact-container ul {
+    list-style: none;
+    padding: 0;
+}
+
+.contact-container li {
+    margin: 15px 0;
+}
+
+/* Liens cliquables */
+.contact-container a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #00796b;
+    padding: 12px;
+    border: 2px solid #00796b;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.contact-container a:hover {
+    background-color: #00796b;
+    color: #fff;
+    transform: scale(1.05);
+}
+
+/* Icônes */
+.contact-container img {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+    filter: brightness(0) saturate(100%) invert(28%) sepia(55%) saturate(450%) hue-rotate(140deg);
+}
+
+.contact-container a:hover img {
+    filter: brightness(0) saturate(100%) invert(100%);
+}
+
+/* Texte non cliquable */
+.contact-container p {
+    color: #333;
+    font-size: 1.1em;
+    margin-top: 10px;
+}
