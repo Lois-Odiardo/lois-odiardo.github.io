@@ -90,6 +90,19 @@ export class ProjectService {
     },
     {
       id: 6,
+      name: 'Netia',
+      technologie: 'Angular',
+      state: 'Terminé',
+      photo: `${this.baseUrl}/netia.jpeg`,
+      cadre: 'Stage DUT',
+      description: 'Durant ce stage, j\'ai réalisé une librairie de notification dont l’objectif est, une fois intégré à un logiciel, de permettre aux utilisateurs de recevoir des messages d’erreur, informatif ou bien de réussite. Ceci dans l’objectif de pouvoir gérer un système de messagerie sans pour autant bloquer les utilisateurs dans leurs usages des logiciels permettant ainsi de ne pas avoir à interagir avec la notification pour retrouver l’accès au logiciel.',
+      contribution: "J'ai pu réaliser l'entièrté de cette librairie",
+      liens: ['https://netia.com/'],
+      role:'Développeur',
+      cles:["Réalisation d'une librairie","Apprentissage du langage Angular"],
+    },
+    {
+      id: 7,
       name: 'Nautilus Rush',
       technologie: 'C#',
       state: 'Terminé',
@@ -102,7 +115,7 @@ export class ProjectService {
       cles:['Réalisation d\'un projet en 30h','Gestion de groupe'],
     },
     {
-      id: 7,
+      id: 8,
       name: 'Nyavigator',
       technologie: 'PHP, SQL',
       state: 'Terminé',
@@ -115,7 +128,7 @@ export class ProjectService {
       cles:["Création d'algorithme de recherche de chemin le plus court","Gestion complète des utilisateurs (Inscription, Authentification sécurisée, Déconnexion)"],
     },
     {
-      id: 8,
+      id: 9,
       name: 'Les aventuriers du rails',
       technologie: 'Java, JavaFX',
       state: 'Terminé',

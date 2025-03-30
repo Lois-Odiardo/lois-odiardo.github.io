@@ -76,12 +76,12 @@ div > .button:focus {
 }
 
 .img-group-2 img {
-    max-width: 100%;
+    max-width: 80%;
     height: auto;
 }
 
 .img-group-3 img {
-    max-width: 100%;
+    max-width: 80%;
     height: auto;
 }
 
@@ -94,7 +94,7 @@ div > .button:focus {
     height: auto;
 }
 .img-group-6 img {
-    max-width: 80%;
+    max-width: 50%;
     height: auto;
 }
 .img-group-7 img {
