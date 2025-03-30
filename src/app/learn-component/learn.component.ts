@@ -111,9 +111,10 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
       <p>Cet apprentissage critique a été vu au travers des différents projets tout au long du BUT.</p>
       <p>Les bibliothèques sont des outils d'aide au développement que j'ai été ammené à choisir et utiliser pour développer des solutions adaptées aux besoins spécifiques de mes différents projets.</p>
       <br>
-      <p>A titre d'exemple, parmis ces bibliothèques, nous pouvons retrouver Doctrine et Twig.</p>
-      <p>Doctrine m'a permis d'interagir avec la base de données de l'un de mes projets de manière efficace et sécurisée.</p>
-      <p>Il m'a permis de mettre en oeuvre des relations entre entités (ManyToMany, OneToMany, etc...). J'ai également utilisé Doctrine pour réaliser des migrations afin de gérer l'évolution de ma base de données sans perte de données.</p>
+      <p>A titre d'exemple, parmis ces bibliothèques, nous pouvons retrouver Doctrine et Twig :</p>
+      <br>
+      <p>Doctrine m'a permis d'interagir avec la base de données de l'un de mes projets de manière efficace et sécurisée. Il m'a permis de mettre en oeuvre des relations entre entités (ManyToMany, OneToMany, etc...). J'ai également utilisé Doctrine pour réaliser des migrations afin de gérer l'évolution de ma base de données sans perte de données.</p>
+      <br>
       <p>Twig m'a permis de structurer les différentes vues de mon projet en séparant distinctement la logique métier et le rendu visuel grâce à ses fonctionnalité d'héritage, de filtres et d'extensions.</p>
       <br>
       <div class="image-container img-group-3">
@@ -140,15 +141,15 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
       <br><strong>AC 8 : </strong>Identifier les enjeux de l’économie de l’innovation numérique
       <br><br>
       <p>Cet apprentissage critique a été vu au travers de mon alternance au sein de la société LUNDI MATIN.</p>
-      <p>Cette société édite un logiciel nommé “LundiMatinBusiness” qui est un ERP.</p>
+      <p>Cette société édite un ERP nommé “LundiMatinBusiness”.</p>
       <br>
       <div class="image-container img-group-6">
         <img src="assets/lundimatin-business.svg" alt="Image lm">
       </div>
       <br>
-      <p>Un système ERP (Enterprise resource planning) est un type de logiciel que les entreprises utilisent pour gérer leurs activités quotidiennes telles que la comptabilité, les achats, la gestion de projets, la gestion des risques et la conformité, ainsi que les opérations de supply chain.</p>
-      <p>De nos jours, un ERP est une solution informatisée globale et intégrée en entreprise. Mais cela n’a pas toujours été le cas. D’une gestion papier en passant par des tableurs piloté manuellement, l’économie fonctionnait au rythme de l’homme.</p>
-      <p>L’innovation numérique a totalement changé le concept de gestion, tout est intégré, tout se sait en temps réel et les nouveaux ERP intègrent du prédictif permettant de prendre des décisions stratégiques.</p>
+      <p>Un système ERP (Enterprise resource planning) est un logiciel que les entreprises utilisent pour gérer leurs activités quotidiennes telles que la comptabilité, les achats, la gestion de projets, la gestion des risques, la conformité, ainsi que les opérations de supply chain.</p>
+      <p>De nos jours, un ERP est une solution informatisée globale et intégrée en entreprise. Mais cela n’a pas toujours été le cas. D’une gestion papier en passant par des tableurs pilotés manuellement, l’économie fonctionnait au rythme de l’homme.</p>
+      <p>L’innovation numérique a totalement changé le concept de gestion, tout est intégré, tout est accessible en temps réel. Les nouveaux ERP intègrent du prédictif permettant de prendre des décisions stratégiques.</p>
       <p>Ma fonction de maintenancier au sein des équipes de LundiMatinBusiness chez LUNDI MATIN m’a permis d’être un intervenant actif de la digitalisation de la gestion d’entreprise.</p>
       
       <br>
@@ -169,9 +170,10 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
       <br>
       <p>L’amélioration que j’ai proposée, dans le cadre de cette alternance et présentée en soutenance, est de faire réaliser une partie des tests par le développeur comme travail préparatoire avant mise en production.</p>
       <br>
-      <p>La réalisation de tests fonctionnels par les développeurs permettrait d’augmenter la qualité de développement qui part en production. Elle allégerait la surcharge de travail pour les équipes de maintenance et par conséquent une charge de travail plus équilibrée et moins de bug chez les clients.</p>
-      <p>Ma première étape, pour diminuer le nombre de bug “simple” chez les maintenanciers, a été de rajouter une étape de test fonctionnels chez les développeurs.</p>
-      <p>Dans un second temps, j’ai proposé de détacher un membre de l’équipe maintenance pour aller seconder l’équipe dev dans le cadre de pré-test. Là encore, cette démarche a permis d’augmenter la qualité des fonctionnalités issues des équipes de dev.</p>
+      <p>La réalisation de tests fonctionnels par les développeurs permettrait d’augmenter la qualité de développement qui part en production. Elle allégerait l'activité des équipes de maintenance et permettrait par conséquent une charge de travail plus équilibrée. Il en résulterait moins de bug chez les clients.</p>
+      <br>
+      <p>Ma première étape, pour diminuer le nombre de bugs “simples” chez les maintenanciers, a été de rajouter une étape de tests fonctionnels chez les développeurs.</p>
+      <p>Dans un second temps, j’ai proposé de détacher un membre de l’équipe maintenance pour aller seconder l’équipe dev dans le cadre de pré-tests. Là encore, cette démarche a permis d’augmenter la qualité des fonctionnalités issues des équipes de dev.</p>
       <p>Pour suivre l’impact de cette proposition, il a été demandé de mettre en place des routines d’évaluation d’impact, comparant deux périodes de travail similaires : avec et sans la présence du maintenancier auprès du dev.</p>
       <br>
       <p>A terme, cette solution devrait permettre d’alléger le nombre de maintenanciers qui pourraient être réassignés aux équipes de dev.</p>
