@@ -7,9 +7,17 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
   imports: [CommonModule, ReactiveFormsModule],
   template: `
     <section>
+      <p>Voici mon portfolio d'apprentissage. Il résume l'ensemble des apprentissages associés aux travaux que j'ai réalisés durant ma formation à l'IUT.</p>
+      <p>On y retrouve les apprentissages critiques notés "AC" associés aux composantes essentielles qui leurs sont ratachées.</p>
+      <p>On trouvera également une évaluation de l'acquisition de ces données allant de 1 à 5 depuis le moins maîtrisé au plus maîtrisé.</p>
+      <br>
       <span class="blue">Partie Réaliser :</span>
-      <br><strong>AC 1 : </strong>Choisir et implémenter des architectures adaptées
-      <br><br>
+      <br>
+      <strong>AC 1 : </strong>Choisir et implémenter des architectures adaptées
+      <br>
+      <br>
+      <p><strong>Composante essentielle liée</strong> :</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.06 - Choisir les ressources techniques appropriées</p>
+      <br>
       <p>Le choix du langage pour la réalisation de mon portfolio s'est porté sur Angular.</p>
       <p>L'objectif est de pouvoir séparer les données, le visuel et les actions de mon site.</p>
       <p>Chaque fonctionnalité présente sur le site est découpée en composants réutilisables.</p>
@@ -20,13 +28,19 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
         <img src="assets/projet1.png" alt="Photo de projet">
         <img src="assets/projet2.png" alt="Photo de projet">
       </div>
-     
+      <br>
+      <p>Niveau d'acquisition : 3</p>
+      <br>
       <div>
         <button class="button" onclick="location.href='/details/0'">Portfolio</button>
       </div><br>
-
-      <br><strong>AC 2 : </strong>Faire évoluer une application existante
-      <br><br>
+      
+      <br>
+      <strong>AC 2 : </strong>Faire évoluer une application existante
+      <br>
+      <br>
+      <p><strong>Composante essentielle liée</strong> :</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.01 - Respecter les besoins décrits par le client</p>
+      <br>
       <p>Cet apprentissage critique a été vu entre autre lors de ma SAE de 3ème année de BUT dont le sujet était l'évolution de l'application Exige.</p>
       <p>Exige est un logiciel éducatif de simulation de gestion d'entreprise en équipe.</p>
       <p>Une fois cette application lancée, elle utilisait l'invite de commande comme interface.</p>
@@ -38,12 +52,19 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
       <div class="image-container img-group-3">
         <img src="assets/exige2.png" alt="Photo d'exige">
       </div>
+      <br>
+      <p>Niveau d'acquisition : 4</p>
+      <br>
       <div>
         <button class="button" onclick="location.href='/details/2'">Exige - new front</button>
       </div><br>
 
-      <br><strong>AC 3 : </strong>Intégrer des solutions dans un environnement de production
-      <br><br>
+      <br>
+      <strong>AC 3 : </strong>Intégrer des solutions dans un environnement de production
+      <br>
+      <br>
+      <p><strong>Composante essentielle liée</strong> :</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;1.04 - Veiller à la qualité du code et à sa documentation</p>
+      <br>
       <p>Lors de mon stage de BUT 2, j'ai eu pour mission de réaliser une librairie de notifications sous Angular.</p>
       <p>Ce projet m'a permis de mettre en place un processus complet d'intégration en production.</p>
       <p>J'ai conçu et développé cette librairie en veillant à deux aspects : assurer son opérabilité avec les logiciels existants, mais également rendre cette librairie facilement déployable.</p>
@@ -51,13 +72,22 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
       <div class="image-container img-group-2">
         <img src="assets/librairie.png" alt="Photo d'utilisation de librairie">
       </div>
+      <br>
+      <p>Niveau d'acquisition : 4</p>
+      <br>
       <div>
         <button class="button" onclick="location.href='/details/6'">Stage 2022-23</button>
       </div><br>
 
       <span class="blue">Partie Optimiser :</span>
-      <br><strong>AC 4 : </strong>Anticiper les résultats de diverses métriques
-      <br><br>
+      <br>
+      <strong>AC 4 : </strong>Anticiper les résultats de diverses métriques
+      <br>
+      <br>
+      <p><strong>Composantes essentielles liées</strong> :</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.03 - S'appuyer sur des schémas de raisonnement</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.04 - Justifier les choix et valider les résultats</p>
+      <br>
       <p>Cet apprentissage critique a été vu entre autre lors de ma SAE Nyavigator de 2ème année de BUT.</p>
       <p>Le sujet était de chercher le chemin le plus court entre deux villes en France avec un temps d'exécution le plus court possible.</p>
       <p>Pour mesurer le temps d'exécution de notre code de recherche du chemin le plus court, j'ai utilisé le logiciel XDebug.</p>
@@ -68,12 +98,20 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
       <div class="image-container img-group-3">
         <img src="assets/nyavigator.png" alt="Photo d'utilisation de nyavigator">
       </div>
+      <br>
+      <p>Niveau d'acquisition : 3</p>
+      <br>
       <div>
         <button class="button" onclick="location.href='/details/8'">Nyavigator</button>
       </div><br>
 
       <br><strong>AC 5 : </strong>Profiler, analyser et justifier le comportement d’un code existant
-      <br><br>
+      <br>
+      <br>
+      <p><strong>Composantes essentielles liées</strong> :</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.01 - Formaliser et modéliser des situations complexes</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.02 - Recensser les algorithmes et les structures de données usuels</p>
+      <br>
       <p>Cet apprentissage critique a été vu entre autre lors de ma SAE Nyavigator de 2ème année de BUT.</p>
       <p>Le sujet était de chercher le chemin le plus court entre deux villes en France avec un temps d'exécution le plus court possible.</p>
       <p>Pour chercher le chemin le plus court, j'ai utilisé plusieurs algorithmes.</p>
@@ -102,12 +140,19 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
       </div>
       <p>Le profilage, l'analyse du code à chaque étape, et le choix de paramètre adéquat ont permis d'optimiser le développement et d'obtenir un résultat répondant au cahier des charges.</p>
       <br>
+      <br>
+      <p>Niveau d'acquisition : 3</p>
+      <br>
       <div>
         <button class="button" onclick="location.href='/details/8'">Nyavigator</button>
       </div><br>
 
       <br><strong>AC 6 : </strong>Choisir et utiliser des bibliothèques dédiées au domaine d’application
-      <br><br>
+      <br>
+      <br>
+      <p><strong>Composante essentielle liée</strong> :</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.04 - Justifier les choix et valider les résultats</p>
+      <br>
       <p>Cet apprentissage critique a été vu au travers des différents projets tout au long du BUT.</p>
       <p>Les bibliothèques sont des outils d'aide au développement que j'ai été ammené à choisir et utiliser pour développer des solutions adaptées aux besoins spécifiques de mes différents projets.</p>
       <br>
@@ -123,13 +168,21 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
       </div>
       <br>
       <p>Grâce à cette expérience, j'ai acquis la capacité d'analyse pour choisir les bibliothèques les plus adaptées ainsi que maîtriser leur intégration.</p>
+      <br>
+      <p>Niveau d'acquisition : 4</p>
+      <br>
       <div>
         <button class="button" onclick="location.href='/details/2'">Exige - new front</button>
       </div><br>
 
       <span class="blue">Partie Collaborer :</span>
       <br><strong>AC 7 : </strong>Organiser et partager une veille numérique
-      <br><br>
+      <br>
+      <br>
+      <p><strong>Composantes essentielles liées</strong> :</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6.01 - Inscrire ma démarche au sein d'une équipe pluridisciplinaire</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6.04 - Développer une communication efficace et collaborative</p>
+      <br>
       <p>Dans le cadre de mes cours de communication, j'ai été ammené à réaliser une veille informationnelle et à la partager à mes camarades de classe.</p>
       <p>Pour cela, j'ai utilisé un agrégateur de flux RSS pour suivre les publications de plusieurs sites de presse dans le domaine de la tech.</p>
       <p>Cette restitution de veille informationnelle a pu se faire grâce à l'agrégateur de flux RSS mais également par la recherche dans des bases de données de presse via des moteurs de recherche dédiés.</p>
@@ -138,8 +191,18 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
         <img src="assets/veille.png" alt="Image agrégateur">
       </div>
       <br>
+      <p>Niveau d'acquisition : 4</p>
+      <br>
+      <div>
+        <button class="button">&nbsp;</button>
+      </div><br>
+      
       <br><strong>AC 8 : </strong>Identifier les enjeux de l’économie de l’innovation numérique
-      <br><br>
+      <br>
+      <br>
+      <p><strong>Composante essentielle liée</strong> :</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6.01 - Inscrire ma démarche au sein d'une équipe pluridisciplinaire</p>
+      <br>
       <p>Cet apprentissage critique a été vu au travers de mon alternance au sein de la société LUNDI MATIN.</p>
       <p>Cette société édite un ERP nommé “LundiMatinBusiness”.</p>
       <br>
@@ -153,12 +216,19 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
       <p>Ma fonction de maintenancier au sein des équipes de LundiMatinBusiness chez LUNDI MATIN m’a permis d’être un intervenant actif de la digitalisation de la gestion d’entreprise.</p>
       
       <br>
+      <br>
+      <p>Niveau d'acquisition : 3</p>
+      <br>
       <div>
         <button class="button" onclick="location.href='/details/3'">Alternance 2023-24</button>
       </div><br>
 
       <br><strong>AC 9 : </strong>Guider la conduite du changement informatique au sein d’une organisation
-      <br><br>
+      <br>
+      <br>
+      <p><strong>Composante essentielle liée</strong> :</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6.02 - Accompagner la mise en œuvre des évolutions informatiques</p>
+      <br>
       <p>Lors de mon alternance chez LUNDI MATIN, j'ai réalisé une analyse critique de son environnement technique. En procédant à la manière d'un audit, j'ai pu faire des suggestions d'amélioration.</p>
         <br>
       <div class="image-container img-group-7">
@@ -177,13 +247,19 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
       <p>Pour suivre l’impact de cette proposition, il a été demandé de mettre en place des routines d’évaluation d’impact, comparant deux périodes de travail similaires : avec et sans la présence du maintenancier auprès du dev.</p>
       <br>
       <p>A terme, cette solution devrait permettre d’alléger le nombre de maintenanciers qui pourraient être réassignés aux équipes de dev.</p>
-
+      <br>
+      <p>Niveau d'acquisition : 3</p>
+      <br>
       <div>
         <button class="button" onclick="location.href='/details/3'">Alternance 2023-24</button>
       </div><br>
 
       <br><strong>AC 10 : </strong>Accompagner le management de projet informatique
-      <br><br>
+      <br>
+      <br>
+      <p><strong>Composante essentielle liée</strong> :</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6.04 - Développer une communication efficace et collaborative</p>
+      <br>
       <p>Dans le cadre de plusieurs de mes projets, j'ai eu l'occasion d'occuper le rôle de Scrum Master.</p>
       <p>Ce rôle m'a permis d'accompagner le management des projets informatiques.</p>
       <p>Les différents outils de gestion de projet utilisés par le Scrum Master, assurent le bon déroulé, le suivi et l'atteinte des objectifs de chaque projet.</p>
@@ -194,6 +270,9 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
       <div class="image-container img-group-7">
         <img src="assets/scrumboat.png" alt="Image du scrumboat">
       </div>
+      <br>
+      <p>Niveau d'acquisition : 4</p>
+      <br>
       <div>
         <button class="button" onclick="location.href='/details/5'">E:cclesia</button>
       </div><br>
