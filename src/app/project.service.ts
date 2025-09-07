@@ -23,7 +23,7 @@ export class ProjectService {
       id: 1,
       name: 'Stage 2024-25',
       technologie: 'C#, WPF, Kotlin',
-      state: 'En cours',
+      state: 'Terminé',
       photo: `${this.baseUrl}/coralis_france_logo.jpg`,
       cadre: 'Stage BUT3',
       description: 'Mise en place d\'un système GPS-RTK sur une tablette Windows et téléphone Android'+
