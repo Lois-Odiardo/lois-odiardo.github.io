@@ -22,15 +22,17 @@ export class ProjectService {
     {
       id: 1,
       name: 'Stage 2024-25',
-      technologie: 'C#, WPF',
+      technologie: 'C#, WPF, Kotlin',
       state: 'En cours',
       photo: `${this.baseUrl}/coralis_france_logo.jpg`,
       cadre: 'Stage BUT3',
-      description: 'Mise en place d\'un système GPS-RTK sur une tablette Windows',
-      contribution: 'Intégration d\'un système RTK au sein des solutions de coralis',
-      liens: ['https://github.com/Lois-Odiardo/autocompletion-scala'],
+      description: 'Mise en place d\'un système GPS-RTK sur une tablette Windows et téléphone Android'+
+          '\n' +
+          'Les deux applications doivent permettre de réaliser la prise de point GPS via une interface et permettre de les exporter vers la suite logicielle de Coralis',
+      contribution: 'Réalisation de 2 applications utilisant un système RTK pour les solutions de Coralis',
+      liens: ['https://www.coralis.com/'],
       role:'Développeur',
-      cles:["Apprentissage C# et WPF","Manipulation de données gps"],
+      cles:["Apprentissage C#, WPF et Kotlin","Manipulation de données gps"],
     },
     {
       id: 2,
