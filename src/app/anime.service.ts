@@ -22,7 +22,7 @@ export interface AnimeListResponse {
 })
 export class AnimeService {
     private readonly MAL_API_URL = 'https://api.myanimelist.net/v2';
-    private readonly CLIENT_ID = 'VOTRE_CLIENT_ID'; // À remplacer par votre Client ID
+    private readonly CLIENT_ID = '4ae9ad3dac63a6b49906396700b78990';
 
     constructor(private http: HttpClient) {}
 
