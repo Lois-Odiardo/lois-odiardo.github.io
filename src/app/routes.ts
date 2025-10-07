@@ -5,6 +5,7 @@ import {AboutComponent} from './about-component/about.component';
 import {LearnComponent} from './learn-component/learn.component';
 import {ProjectListComponent} from './project-list/project-list.component'
 import { ContactComponent } from './contact/contact.component';
+import { RandomAnimeComponent } from './random-anime/random-anime.component';
 
 
 const routeConfig: Routes = [
@@ -35,6 +36,11 @@ const routeConfig: Routes = [
         path: 'contact',
         component: ContactComponent,
         title: 'Contact'
+    },
+    {
+        path: 'random-anime',
+        component: RandomAnimeComponent,
+        title: 'Anime Aléatoire'
     },
 
 ];
