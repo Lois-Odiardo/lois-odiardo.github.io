@@ -7,40 +7,51 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
     selector: 'app-random-anime',
     imports: [CommonModule],
     template: `
-    <article class="anime-container">
-      <h1>Anime Aléatoire - Plan to Watch</h1>
-      <p class="subtitle">Utilisateur: Lothi13</p>
+        <article class="anime-container">
+            <h1>Anime Aléatoire - Plan to Watch</h1>
+            <p class="subtitle">Utilisateur: Lothi13</p>
 
-      <div *ngIf="loading" class="loading">
-        <div class="spinner"></div>
-        <p>Chargement des animés...</p>
-      </div>
+            <div *ngIf="loading" class="loading">
+                <div class="spinner"></div>
+                <p>Chargement des animés...</p>
+            </div>
 
-      <div *ngIf="error" class="error">
-        <p>{{ error }}</p>
-        <button (click)="loadAnimeList()" class="btn-retry">Réessayer</button>
-      </div>
+            <div *ngIf="error" class="error">
+                <p>{{ error }}</p>
+                <button (click)="loadAnimeList()" class="btn-retry">Réessayer</button>
+            </div>
 
-      <div *ngIf="!loading && !error && currentAnime" class="anime-display">
-        <div class="anime-card" [@fadeSlide]="animationState">
-          <div class="image-container">
-            <img 
-              [src]="currentAnime.main_picture?.large || currentAnime.main_picture?.medium" 
-              [alt]="currentAnime.title"
-              class="anime-image"
-            />
-          </div>
-          <h2 class="anime-title">{{ currentAnime.title }}</h2>
-        </div>
+            <div *ngIf="!loading && !error && !currentAnime && animeList.length > 0" class="initial-state">
+                <div class="mystery-box">
+                    <div class="question-mark">?</div>
+                    <p class="mystery-text">Découvre un animé aléatoire !</p>
+                </div>
+                <button (click)="showRandomAnime()" class="btn-random btn-start">
+                    🎲 Lancer l'aléatoire
+                </button>
+                <p class="anime-count">{{ animeList.length }} animés disponibles</p>
+            </div>
 
-        <button (click)="showRandomAnime()" class="btn-random" [disabled]="isAnimating">
-          🎲 Anime Aléatoire
-        </button>
+            <div *ngIf="!loading && !error && currentAnime" class="anime-display">
+                <div class="anime-card" [@fadeSlide]="animationState">
+                    <div class="image-container">
+                        <img
+                                [src]="currentAnime.main_picture.large || currentAnime.main_picture.medium"
+                                [alt]="currentAnime.title"
+                                class="anime-image"
+                        />
+                    </div>
+                    <h2 class="anime-title">{{ currentAnime.title }}</h2>
+                </div>
 
-        <p class="anime-count">{{ animeList.length }} animés dans le plan to watch</p>
-      </div>
-    </article>
-  `,
+                <button (click)="showRandomAnime()" class="btn-random" [disabled]="isAnimating">
+                    🎲 Autre Anime Aléatoire
+                </button>
+
+                <p class="anime-count">{{ animeList.length }} animés dans le plan to watch</p>
+            </div>
+        </article>
+    `,
     styleUrls: ['./random-anime.component.css'],
     animations: [
         trigger('fadeSlide', [
@@ -84,11 +95,10 @@ export class RandomAnimeComponent implements OnInit {
                 this.animeList = response.data.map(item => item.node);
                 this.loading = false;
 
-                if (this.animeList.length > 0) {
-                    this.currentAnime = this.animeService.getRandomAnime(this.animeList);
-                } else {
+                if (this.animeList.length === 0) {
                     this.error = 'Aucun animé dans le plan to watch';
                 }
+                // Ne pas afficher automatiquement un animé, attendre le clic
             },
             error: (err) => {
                 this.loading = false;
