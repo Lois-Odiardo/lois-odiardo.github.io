@@ -1,10 +1,11 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { AnimeService, Anime } from '../anime.service';
-import { trigger, state, style, transition, animate } from '@angular/animations';
+import {Component, OnInit, inject} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {AnimeService, Anime} from '../anime.service';
+import {trigger, state, style, transition, animate} from '@angular/animations';
 
 @Component({
     selector: 'app-random-anime',
+    standalone: true,
     imports: [CommonModule],
     template: `
         <article class="anime-container">
@@ -91,19 +92,23 @@ export class RandomAnimeComponent implements OnInit {
         this.error = null;
 
         this.animeService.getPlanToWatch('Lothi13').subscribe({
-            next: (response) => {
-                this.animeList = response.data.map(item => item.node);
+            next: (animeList) => {
+                this.animeList = animeList;
                 this.loading = false;
 
                 if (this.animeList.length === 0) {
                     this.error = 'Aucun animé dans le plan to watch';
                 }
-                // Ne pas afficher automatiquement un animé, attendre le clic
             },
             error: (err) => {
                 this.loading = false;
-                this.error = 'Erreur lors du chargement des animés. Vérifiez votre Client ID MyAnimeList.';
                 console.error('Erreur API MyAnimeList:', err);
+
+                if (err.status === 401 || err.status === 403) {
+                    this.error = 'Erreur d\'authentification. Vérifiez votre Client ID MyAnimeList.';
+                } else {
+                    this.error = `Erreur lors du chargement des animés (${err.status || 'réseau'})`;
+                }
             }
         });
     }

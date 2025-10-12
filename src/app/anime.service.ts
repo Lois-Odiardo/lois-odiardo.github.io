@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 export interface Anime {
     id: number;
@@ -21,19 +22,24 @@ export interface AnimeListResponse {
     providedIn: 'root'
 })
 export class AnimeService {
-    private readonly MAL_API_URL = 'https://api.myanimelist.net/v2';
-    private readonly CLIENT_ID = '4ae9ad3dac63a6b49906396700b78990';
+    private readonly CLIENT_ID = '4ae9ad3dac63a6b49906396700b78990'; // À remplacer par votre vrai Client ID
+    private readonly CORS_PROXY = 'https://corsproxy.io/?';
 
     constructor(private http: HttpClient) {}
 
-    getPlanToWatch(username: string): Observable<AnimeListResponse> {
+    getPlanToWatch(username: string): Observable<Anime[]> {
+        const malUrl = `https://api.myanimelist.net/v2/users/${username}/animelist?status=plan_to_watch&fields=main_picture&limit=1000`;
+        const url = `${this.CORS_PROXY}${encodeURIComponent(malUrl)}`;
+
         const headers = new HttpHeaders({
             'X-MAL-CLIENT-ID': this.CLIENT_ID
         });
 
-        const url = `${this.MAL_API_URL}/users/${username}/animelist?status=plan_to_watch&fields=main_picture&limit=1000`;
+        console.log('Requête API MyAnimeList via proxy');
 
-        return this.http.get<AnimeListResponse>(url, { headers });
+        return this.http.get<AnimeListResponse>(url, { headers }).pipe(
+            map(response => response.data.map(item => item.node))
+        );
     }
 
     getRandomAnime(animeList: Anime[]): Anime | null {

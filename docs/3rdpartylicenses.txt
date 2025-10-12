@@ -327,7 +327,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 --------------------------------------------------------------------------------
-Package: @angular/forms
+Package: @angular/animations
 License: "MIT"
 
 The MIT License
@@ -353,7 +353,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 
 --------------------------------------------------------------------------------
-Package: @angular/animations
+Package: @angular/forms
 License: "MIT"
 
 The MIT License
