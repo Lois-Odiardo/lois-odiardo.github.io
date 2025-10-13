@@ -1,0 +1,254 @@
+/* everyone-john/everyone-john.component.css */
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.header h1 {
+    font-size: 3rem;
+    color: #333;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    margin: 0;
+}
+
+/* Bouton de tirage */
+.btn-tirer {
+    display: block;
+    margin: 0 auto 60px;
+    padding: 18px 45px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.btn-tirer:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+.btn-tirer:active {
+    transform: translateY(-1px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* Conteneur des objectifs */
+.objectifs-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 35px;
+    padding: 20px;
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Cartes d'objectifs */
+.objectif {
+    width: 350px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+}
+
+.objectif::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, transparent, currentColor, transparent);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.objectif:hover {
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Badge de niveau */
+.objectif-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px;
+    font-size: 1rem;
+    font-weight: bold;
+    color: white;
+}
+
+.badge-icon {
+    font-size: 1.2rem;
+}
+
+.badge-level {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Contenu */
+.objectif h2 {
+    padding: 0 25px;
+    margin: 15px 0;
+    font-size: 1.5rem;
+    text-align: center;
+    color: #333;
+}
+
+.objectif-text {
+    padding: 20px 30px;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #555;
+    text-align: center;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.objectif-footer {
+    padding: 15px;
+    text-align: center;
+    border-top: 2px solid;
+    margin-top: 10px;
+}
+
+.points {
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 8px 20px;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+/* Styles spécifiques par difficulté */
+.difficulte-1 {
+    border-top: 6px solid #4CAF50;
+}
+
+.difficulte-1::before {
+    color: #4CAF50;
+}
+
+.difficulte-1 .objectif-badge {
+    background: linear-gradient(135deg, #4CAF50 0%, #45a049 100%);
+}
+
+.difficulte-1 .objectif-footer {
+    border-top-color: #4CAF50;
+    background: linear-gradient(to bottom, transparent, rgba(76, 175, 80, 0.05));
+}
+
+.difficulte-1 .points {
+    background: rgba(76, 175, 80, 0.15);
+    color: #2e7d32;
+}
+
+.difficulte-2 {
+    border-top: 6px solid #FF9800;
+}
+
+.difficulte-2::before {
+    color: #FF9800;
+}
+
+.difficulte-2 .objectif-badge {
+    background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%);
+}
+
+.difficulte-2 .objectif-footer {
+    border-top-color: #FF9800;
+    background: linear-gradient(to bottom, transparent, rgba(255, 152, 0, 0.05));
+}
+
+.difficulte-2 .points {
+    background: rgba(255, 152, 0, 0.15);
+    color: #e65100;
+}
+
+.difficulte-3 {
+    border-top: 6px solid #f44336;
+}
+
+.difficulte-3::before {
+    color: #f44336;
+}
+
+.difficulte-3 .objectif-badge {
+    background: linear-gradient(135deg, #f44336 0%, #d32f2f 100%);
+}
+
+.difficulte-3 .objectif-footer {
+    border-top-color: #f44336;
+    background: linear-gradient(to bottom, transparent, rgba(244, 67, 54, 0.05));
+}
+
+.difficulte-3 .points {
+    background: rgba(244, 67, 54, 0.15);
+    color: #c62828;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 2.2rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .objectif {
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .btn-tirer {
+        font-size: 1.1rem;
+        padding: 15px 35px;
+    }
+}

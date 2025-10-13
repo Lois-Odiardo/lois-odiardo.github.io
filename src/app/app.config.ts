@@ -7,7 +7,7 @@ import routeConfig from './routes';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideRouter(routeConfig),
-    provideHttpClient(),  // ← AJOUTER CETTE LIGNE
-    provideAnimations()   // ← AJOUTER CETTE LIGNE aussi pour les animations
+    provideHttpClient(),
+    provideAnimations()
   ]
 };
