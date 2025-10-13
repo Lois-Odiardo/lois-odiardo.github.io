@@ -35,6 +35,11 @@ import {trigger, state, style, transition, animate} from '@angular/animations';
 
             <div *ngIf="!loading && !error && currentAnime" class="anime-display">
                 <div class="anime-card" [@fadeSlide]="animationState">
+                    <div *ngIf="loadingDetails" class="loading-details">
+                        <div class="spinner-small"></div>
+                        <p>Chargement...</p>
+                    </div>
+
                     <div class="image-container">
                         <img
                                 [src]="currentAnime.main_picture.large || currentAnime.main_picture.medium"
@@ -42,10 +47,50 @@ import {trigger, state, style, transition, animate} from '@angular/animations';
                                 class="anime-image"
                         />
                     </div>
-                    <h2 class="anime-title">{{ currentAnime.title }}</h2>
+                    <h2 class="anime-title">
+                        <a [href]="'https://myanimelist.net/anime/' + currentAnime.id" target="_blank" rel="noopener noreferrer">
+                            {{ currentAnime.title }}
+                        </a>
+                    </h2>
+
+                    <div class="anime-info">
+                        <div *ngIf="currentAnime.genres && currentAnime.genres.length > 0" class="info-section">
+                            <span class="info-label">📚 Genres:</span>
+                            <div class="genres-list">
+                                <span *ngFor="let genre of currentAnime.genres" class="genre-tag">
+                                    {{ genre.name }}
+                                </span>
+                            </div>
+                        </div>
+
+                        <div *ngIf="currentAnime.num_episodes" class="info-section">
+                            <span class="info-label">🎬 Épisodes:</span>
+                            <span class="info-value">{{ currentAnime.num_episodes }}</span>
+                        </div>
+
+                        <div *ngIf="previousSeason" class="info-section related-section">
+                            <span class="info-label">⬅️ Saison précédente:</span>
+                            <a [href]="'https://myanimelist.net/anime/' + previousSeason.id"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="related-link">
+                                {{ previousSeason.title }}
+                            </a>
+                        </div>
+
+                        <div *ngIf="parentStory" class="info-section related-section">
+                            <span class="info-label">📖 Histoire principale:</span>
+                            <a [href]="'https://myanimelist.net/anime/' + parentStory.id"
+                               target="_blank"
+                               rel="noopener noreferrer"
+                               class="related-link">
+                                {{ parentStory.title }}
+                            </a>
+                        </div>
+                    </div>
                 </div>
 
-                <button (click)="showRandomAnime()" class="btn-random" [disabled]="isAnimating">
+                <button (click)="showRandomAnime()" class="btn-random" [disabled]="isAnimating || loadingDetails">
                     🎲 Autre Anime Aléatoire
                 </button>
 
@@ -78,7 +123,10 @@ export class RandomAnimeComponent implements OnInit {
 
     animeList: Anime[] = [];
     currentAnime: Anime | null = null;
+    previousSeason: { id: number; title: string } | null = null;
+    parentStory: { id: number; title: string } | null = null;
     loading = false;
+    loadingDetails = false;
     error: string | null = null;
     animationState = 'visible';
     isAnimating = false;
@@ -102,7 +150,6 @@ export class RandomAnimeComponent implements OnInit {
             },
             error: (err) => {
                 this.loading = false;
-                console.error('Erreur API MyAnimeList:', err);
 
                 if (err.status === 401 || err.status === 403) {
                     this.error = 'Erreur d\'authentification. Vérifiez votre Client ID MyAnimeList.';
@@ -114,14 +161,33 @@ export class RandomAnimeComponent implements OnInit {
     }
 
     showRandomAnime() {
-        if (this.animeList.length === 0 || this.isAnimating) return;
+        if (this.animeList.length === 0 || this.isAnimating || this.loadingDetails) return;
 
         this.isAnimating = true;
         this.animationState = 'void';
 
         setTimeout(() => {
-            this.currentAnime = this.animeService.getRandomAnime(this.animeList);
+            const selectedAnime = this.animeService.getRandomAnime(this.animeList);
+            if (!selectedAnime) return;
+
+            this.currentAnime = selectedAnime;
+            this.previousSeason = null;
+            this.parentStory = null;
             this.animationState = 'visible';
+
+            this.loadingDetails = true;
+            this.animeService.getAnimeDetails(selectedAnime.id).subscribe({
+                next: (details) => {
+                    if (details.related_anime) {
+                        this.previousSeason = this.animeService.getPreviousSeason(details);
+                        this.parentStory = this.animeService.getParentStory(details);
+                    }
+                    this.loadingDetails = false;
+                },
+                error: () => {
+                    this.loadingDetails = false;
+                }
+            });
 
             setTimeout(() => {
                 this.isAnimating = false;
