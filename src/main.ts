@@ -8,7 +8,7 @@ import routeConfig from './app/routes';
 bootstrapApplication(AppComponent, {
     providers: [
         provideRouter(routeConfig),
-        provideHttpClient(),  // ← AJOUTER CETTE LIGNE
-        provideAnimations()   // ← AJOUTER CETTE LIGNE
+        provideHttpClient(),
+        provideAnimations()
     ]
 }).catch(err => console.error(err));
