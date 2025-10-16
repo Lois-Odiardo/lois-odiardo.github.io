@@ -1,6 +1,6 @@
 import {Routes} from '@angular/router';
 import {HomeComponent} from './home/home.component';
-import {DetailsComponent} from './details/details.component';
+import {ProjectDetailsComponent} from './details/project-details.component';
 import {AboutComponent} from './about-component/about.component';
 import {LearnComponent} from './learn-component/learn.component';
 import {ProjectListComponent} from './project-list/project-list.component'
@@ -30,7 +30,7 @@ const routeConfig: Routes = [
     },
     {
         path: 'details/:id',
-        component: DetailsComponent,
+        component: ProjectDetailsComponent,
         title: 'Details projet',
     },
     {

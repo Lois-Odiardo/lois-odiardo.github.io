@@ -9,5 +9,8 @@ export interface Project {
     description: string;
     contribution: string;
     liens: string[];
-    cles:string[];
+    cles: string[];
+    dateDebut: string; // Format: 'YYYY-MM' pour trier chronologiquement
+    dateFin?: string; // Optionnel, pour les projets en cours
+    categorie: 'Scolaire' | 'Professionnel' | 'Personnel'; // Catégorie du projet
 }
