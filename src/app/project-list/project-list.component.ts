@@ -58,14 +58,14 @@ import { ProjectService } from '../project.service';
               🎓 Scolaire
             </button>
             <button
-                [class.active]="selectedCategories.includes('Professionnelle')"
-                (click)="toggleCategory('Professionnelle')"
+                [class.active]="selectedCategories.includes('Professionnel')"
+                (click)="toggleCategory('Professionnel')"
                 class="filter-btn category-btn professional">
               💼 Professionnel
             </button>
             <button
-                [class.active]="selectedCategories.includes('Personnelle')"
-                (click)="toggleCategory('Personnelle')"
+                [class.active]="selectedCategories.includes('Personnel')"
+                (click)="toggleCategory('Personnel')"
                 class="filter-btn category-btn personal">
               🎨 Personnel
             </button>
