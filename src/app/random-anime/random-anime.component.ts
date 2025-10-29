@@ -68,6 +68,11 @@ import {trigger, state, style, transition, animate} from '@angular/animations';
                             <span class="info-value">{{ currentAnime.num_episodes }}</span>
                         </div>
 
+                        <div *ngIf="estimatedDuration" class="info-section">
+                            <span class="info-label">⏱️ Durée estimée:</span>
+                            <span class="info-value">{{ formatDuration(estimatedDuration) }}</span>
+                        </div>
+
                         <div *ngIf="previousSeason" class="info-section related-section">
                             <span class="info-label">⬅️ Saison précédente:</span>
                             <a [href]="'https://myanimelist.net/anime/' + previousSeason.id"
@@ -125,6 +130,7 @@ export class RandomAnimeComponent implements OnInit {
     currentAnime: Anime | null = null;
     previousSeason: { id: number; title: string } | null = null;
     parentStory: { id: number; title: string } | null = null;
+    estimatedDuration: { hours: number; minutes: number; total_minutes: number } | null = null;
     loading = false;
     loadingDetails = false;
     error: string | null = null;
@@ -173,8 +179,13 @@ export class RandomAnimeComponent implements OnInit {
             this.currentAnime = selectedAnime;
             this.previousSeason = null;
             this.parentStory = null;
+            this.estimatedDuration = null;
             this.animationState = 'visible';
 
+            // Calculer la durée estimée immédiatement
+            this.estimatedDuration = this.animeService.getEstimatedDuration(selectedAnime);
+
+            // Charger les détails supplémentaires (saisons liées)
             this.loadingDetails = true;
             this.animeService.getAnimeDetails(selectedAnime.id).subscribe({
                 next: (details) => {
@@ -193,5 +204,12 @@ export class RandomAnimeComponent implements OnInit {
                 this.isAnimating = false;
             }, 500);
         }, 300);
+    }
+
+    formatDuration(duration: { hours: number; minutes: number; total_minutes: number }): string {
+        if (duration.hours > 0) {
+            return `${duration.hours}h ${duration.minutes}min`;
+        }
+        return `${duration.total_minutes}min`;
     }
 }

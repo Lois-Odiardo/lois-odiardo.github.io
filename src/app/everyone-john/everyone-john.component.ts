@@ -1,13 +1,6 @@
-// everyone-john/everyone-john.component.ts
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-interface ObjectifsThematiques {
-    theme: string;
-    difficulte1: string;
-    difficulte2: string;
-    difficulte3: string;
-}
+import { SupabaseService, ObjectifsThematiques } from '../supabase.service';
 
 @Component({
     selector: 'app-everyone-john',
@@ -20,7 +13,12 @@ interface ObjectifsThematiques {
                 <p class="subtitle">Générateur d'objectifs aléatoires</p>
             </div>
 
-            <div class="mode-selector" *ngIf="!objectifsTires">
+            <div *ngIf="loading" class="loading">
+                <div class="spinner"></div>
+                <p>Chargement...</p>
+            </div>
+
+            <div class="mode-selector" *ngIf="!objectifsTires && !loading">
                 <button (click)="tirerObjectifs(false)" class="btn-mode">
                     🎯 Tirer objectifs aléatoires
                 </button>
@@ -107,80 +105,14 @@ interface ObjectifsThematiques {
     `,
     styleUrls: ['./everyone-john.component.css']
 })
-export class EveryoneJohnComponent {
-    // Listes d'objectifs par difficulté
-    private objectifsDifficulte1: string[] = [
-        "Manger un sandwich",
-        "Faire un compliment à un inconnu",
-        "Acheter un café",
-        "Siffler une chanson en public",
-        "Prendre une photo avec quelqu'un",
-        "Donner de l'argent à un musicien de rue",
-        "Porter un chapeau pendant une heure",
-        "Faire rire quelqu'un"
-    ];
+export class EveryoneJohnComponent implements OnInit {
+    private supabaseService = inject(SupabaseService);
 
-    private objectifsDifficulte2: string[] = [
-        "Convaincre quelqu'un de vous prêter 20€",
-        "Entrer dans un lieu privé sans autorisation",
-        "Voler un objet dans un magasin",
-        "Faire pleurer quelqu'un",
-        "Obtenir le numéro de téléphone d'un inconnu",
-        "Se faire inviter à un repas",
-        "Ruiner un rendez-vous amoureux",
-        "Provoquer une dispute entre deux personnes"
-    ];
-
-    private objectifsDifficulte3: string[] = [
-        "Se faire arrêter par la police",
-        "Détruire quelque chose de valeur",
-        "Causer un accident",
-        "Être interviewé par les médias",
-        "Organiser une émeute",
-        "Voler un véhicule",
-        "Mettre le feu à quelque chose d'important",
-        "Convaincre quelqu'un de commettre un crime"
-    ];
-
-    // Objectifs thématiques
-    private objectifsThematiques: ObjectifsThematiques[] = [
-        {
-            theme: "Cirque 🎪",
-            difficulte1: "Lancer une tarte à la crème au visage de quelqu'un",
-            difficulte2: "Faire un salto arrière",
-            difficulte3: "Dompter un tigre ou un animal dangereux"
-        },
-        {
-            theme: "Espionnage 🕵️",
-            difficulte1: "Porter des lunettes de soleil à l'intérieur pendant 1 heure",
-            difficulte2: "Fouiller le sac ou les poches de quelqu'un sans se faire prendre",
-            difficulte3: "Infiltrer un bâtiment sécurisé et photographier un document secret"
-        },
-        {
-            theme: "Cuisine 👨‍🍳",
-            difficulte1: "Faire goûter un plat que vous avez préparé à un inconnu",
-            difficulte2: "Cuisiner un repas complet avec des ingrédients volés",
-            difficulte3: "Organiser un dîner gastronomique pour 5 personnes dans un lieu insolite"
-        },
-        {
-            theme: "Célébrité ⭐",
-            difficulte1: "Signer un autographe à quelqu'un",
-            difficulte2: "Convaincre 3 personnes que vous êtes une célébrité",
-            difficulte3: "Organiser une conférence de presse improvisée"
-        },
-        {
-            theme: "Mode 👗",
-            difficulte1: "Porter un vêtement à l'envers toute la journée",
-            difficulte2: "Échanger vos vêtements avec quelqu'un",
-            difficulte3: "Organiser un défilé de mode improvisé dans un lieu public"
-        },
-        {
-            theme: "Sport ⚽",
-            difficulte1: "Faire 20 pompes en public",
-            difficulte2: "Défier quelqu'un dans une compétition sportive et gagner",
-            difficulte3: "Organiser un tournoi sportif improvisé avec au moins 8 participants"
-        }
-    ];
+    // Cache des objectifs chargés depuis Supabase
+    private objectifsDifficulte1: string[] = [];
+    private objectifsDifficulte2: string[] = [];
+    private objectifsDifficulte3: string[] = [];
+    private themes: string[] = [];
 
     objectifsTires: {
         difficulte1: string;
@@ -193,19 +125,71 @@ export class EveryoneJohnComponent {
     aChangeUnObjectif = false;
     aChangeTousLesObjectifs = false;
     objectifsChanges: Set<number> = new Set();
+    loading = true;
+
+    ngOnInit(): void {
+        this.chargerObjectifs();
+    }
+
+    private chargerObjectifs(): void {
+        this.loading = true;
+
+        // Charger tous les objectifs aléatoires
+        this.supabaseService.getObjectifsByDifficulte(1, false).subscribe({
+            next: (objectifs) => {
+                this.objectifsDifficulte1 = objectifs.map(o => o.objectif);
+            }
+        });
+
+        this.supabaseService.getObjectifsByDifficulte(2, false).subscribe({
+            next: (objectifs) => {
+                this.objectifsDifficulte2 = objectifs.map(o => o.objectif);
+            }
+        });
+
+        this.supabaseService.getObjectifsByDifficulte(3, false).subscribe({
+            next: (objectifs) => {
+                this.objectifsDifficulte3 = objectifs.map(o => o.objectif);
+            }
+        });
+
+        // Charger les thèmes disponibles
+        this.supabaseService.getThemes().subscribe({
+            next: (themes) => {
+                this.themes = themes;
+                this.loading = false;
+            },
+            error: (err) => {
+                console.error('Erreur chargement objectifs:', err);
+                this.loading = false;
+            }
+        });
+    }
 
     tirerObjectifs(thematique: boolean): void {
         this.modeThematique = thematique;
 
         if (thematique) {
-            const themeAleatoire = this.tirerAleatoire(this.objectifsThematiques);
-            this.themeActuel = themeAleatoire.theme;
-            this.objectifsTires = {
-                difficulte1: themeAleatoire.difficulte1,
-                difficulte2: themeAleatoire.difficulte2,
-                difficulte3: themeAleatoire.difficulte3
-            };
+            // Tirer un thème aléatoire
+            const themeAleatoire = this.supabaseService.getRandomElement(this.themes);
+            if (!themeAleatoire) return;
+
+            this.themeActuel = themeAleatoire;
+
+            // Charger les objectifs de ce thème
+            this.supabaseService.getObjectifsByTheme(themeAleatoire).subscribe({
+                next: (objectifs) => {
+                    if (objectifs) {
+                        this.objectifsTires = {
+                            difficulte1: objectifs.difficulte1,
+                            difficulte2: objectifs.difficulte2,
+                            difficulte3: objectifs.difficulte3
+                        };
+                    }
+                }
+            });
         } else {
+            // Mode aléatoire classique
             this.objectifsTires = {
                 difficulte1: this.tirerAleatoire(this.objectifsDifficulte1),
                 difficulte2: this.tirerAleatoire(this.objectifsDifficulte2),

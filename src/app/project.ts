@@ -12,5 +12,5 @@ export interface Project {
     cles: string[];
     dateDebut: string; // Format: 'YYYY-MM' pour trier chronologiquement
     dateFin?: string; // Optionnel, pour les projets en cours
-    categorie: 'Scolaire' | 'Professionnel' | 'Personnel'; // Catégorie du projet
+    categorie: 'Universitaires' | 'Professionnels' | 'Personnels'; // Catégorie du projet
 }

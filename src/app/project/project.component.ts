@@ -35,6 +35,16 @@ import { RouterModule } from '@angular/router';
           <span>{{ project.technologie }}</span>
         </div>
 
+        <div class="project-tech">
+          <svg class="tech-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+          <span>{{ formatDate() }}</span>
+        </div>
+
         <p class="project-description">{{ getShortDescription() }}</p>
 
         <div class="project-footer">
@@ -60,8 +70,8 @@ export class ProjectComponent {
   }
 
   getCategoryClass(): string {
-    if (this.project.categorie === 'Scolaire') return 'category-school';
-    if (this.project.categorie === 'Professionnel') return 'category-professional';
+    if (this.project.categorie === 'Universitaires') return 'category-school';
+    if (this.project.categorie === 'Professionnels') return 'category-professional';
     return 'category-personal';
   }
 
@@ -71,5 +81,38 @@ export class ProjectComponent {
       return this.project.description;
     }
     return this.project.description.substring(0, maxLength) + '...';
+  }
+
+  formatDate(): string {
+    const formatMonth = (dateStr: string | undefined): string => {
+      // Gestion du cas undefined ou null
+      if (!dateStr) {
+        return 'En cours';
+      }
+
+      try {
+        const parts = dateStr.split('-');
+        if (parts.length !== 2) {
+          return dateStr; // Retourne la chaîne originale si format invalide
+        }
+
+        const [year, month] = parts;
+        const months = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Août', 'Sep', 'Oct', 'Nov', 'Déc'];
+        const monthIndex = parseInt(month) - 1;
+
+        if (monthIndex >= 0 && monthIndex < 12) {
+          return `${months[monthIndex]} ${year}`;
+        }
+        return dateStr;
+      } catch (error) {
+        console.error('Erreur formatage date:', error);
+        return dateStr || '';
+      }
+    };
+
+    const debut = formatMonth(this.project.dateDebut);
+    const fin = formatMonth(this.project.dateFin);
+
+    return `${debut} - ${fin}`;
   }
 }
