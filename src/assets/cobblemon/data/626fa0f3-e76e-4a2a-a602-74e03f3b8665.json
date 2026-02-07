@@ -1,0 +1,68 @@
+{
+  "uuid": "626fa0f3-e76e-4a2a-a602-74e03f3b8665",
+  "starterPrompted": true,
+  "starterLocked": false,
+  "starterSelected": true,
+  "starterUUID": "f7f53686-0358-4ca7-826c-4ec27abe2bf2",
+  "keyItems": [],
+  "battleTheme": "cobblemon:battle.pvp.default",
+  "extraData": {},
+  "advancementData": {
+    "totalCaptureCount": 8,
+    "totalEggsCollected": 0,
+    "totalEggsHatched": 0,
+    "totalEvolvedCount": 2,
+    "totalBattleVictoryCount": 3,
+    "totalPvPBattleVictoryCount": 0,
+    "totalPvWBattleVictoryCount": 3,
+    "totalPvNBattleVictoryCount": 0,
+    "totalShinyCaptureCount": 0,
+    "totalTradedCount": 0,
+    "totalTypeCaptureCounts": {
+      "fighting": 2,
+      "normal": 2,
+      "psychic": 1,
+      "fire": 2,
+      "flying": 1,
+      "dragon": 1,
+      "ground": 1,
+      "electric": 1,
+      "fairy": 1
+    },
+    "totalDefeatedCounts": {
+      "cobblemon:gastly": 1
+    },
+    "aspectsCollected": {
+      "cobblemon:machop": [
+        "male"
+      ],
+      "cobblemon:farigiraf": [
+        "male"
+      ],
+      "cobblemon:ninetales": [
+        "male"
+      ],
+      "cobblemon:growlithe": [
+        "female"
+      ],
+      "cobblemon:rookidee": [
+        "female"
+      ],
+      "cobblemon:corvisquire": [
+        "female"
+      ],
+      "cobblemon:raboot": [
+        "female"
+      ],
+      "cobblemon:cyclizar": [
+        "male"
+      ],
+      "cobblemon:greattusk": [
+        "genderless"
+      ],
+      "cobblemon:dedenne": [
+        "female"
+      ]
+    }
+  }
+}

@@ -7,6 +7,7 @@ import {ProjectListComponent} from './project-list/project-list.component'
 import { ContactComponent } from './contact/contact.component';
 import { RandomAnimeComponent } from './random-anime/random-anime.component';
 import { EveryoneJohnComponent } from './everyone-john/everyone-john.component';
+import {CobblemonComponent} from "./cobblemon/cobblemon.component";
 
 
 const routeConfig: Routes = [
@@ -47,6 +48,11 @@ const routeConfig: Routes = [
         path: 'everyone-john',
         component: EveryoneJohnComponent,
         title: 'Everyone is John'
+    },
+    {
+        path: 'cobblemon',
+        component: CobblemonComponent,
+        title: 'Cobblemon academie'
     },
 
 ];

@@ -1,0 +1,632 @@
+/* cobblemon/cobblemon.component.css */
+
+/* Pas d'import - on utilise des polices système */
+
+:host {
+    --mc-dark: #1a1a2e;
+    --mc-panel: #2d2d44;
+    --mc-slot: #373752;
+    --mc-slot-border: #1a1a2e;
+    --mc-slot-highlight: #4a4a6a;
+    --mc-text: #e0e0e0;
+    --mc-text-dim: #8888aa;
+
+    --poke-red: #DC0A2D;
+    --poke-red-dark: #a0071f;
+
+    --color-captured: #48c78e;
+    --color-captured-bg: #1a3a2a;
+    --color-captured-border: #2d6b4a;
+    --color-shiny: #f0b429;
+    --color-shiny-bg: #3a2e10;
+    --color-shiny-border: #6b5520;
+    --color-seen: #818cf8;
+    --color-seen-bg: #1e1e3a;
+    --color-seen-border: #3a3a6b;
+    --color-unseen-bg: #252538;
+    --color-unseen-border: #1a1a2e;
+    --color-legendary: #c084fc;
+    --color-alpha: #f87171;
+
+    display: block;
+    width: 100%;
+}
+
+.cobblemon-container {
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    background: var(--mc-dark);
+    min-height: 100vh;
+    color: var(--mc-text);
+}
+
+.cobblemon-container > *:not(.cobblemon-header) {
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 16px;
+    padding-right: 16px;
+}
+
+/* === HEADER === */
+
+.cobblemon-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 35px 20px;
+    background: var(--poke-red);
+    border-bottom: 4px solid #000;
+    position: relative;
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.header-pokeball {
+    width: 24px;
+    height: 24px;
+    background: white;
+    border: 4px solid #333;
+    border-radius: 50%;
+    margin: 0 auto 16px;
+    position: relative;
+}
+
+.header-pokeball::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: -4px;
+    right: -4px;
+    height: 4px;
+    background: #333;
+    transform: translateY(-50%);
+}
+
+.cobblemon-header h1 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #fff;
+    margin: 0 0 10px;
+    line-height: 1.4;
+    text-transform: uppercase;
+}
+
+.cobblemon-subtitle {
+    font-size: 0.65rem;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.section-title {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--mc-text);
+    margin: 0 0 20px;
+    padding-left: 4px;
+    text-transform: uppercase;
+}
+
+/* === LOADING === */
+
+.loading-container {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--mc-text-dim);
+}
+
+.loading-container p {
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.pokeball-spinner {
+    border: 4px solid var(--mc-slot);
+    border-top: 4px solid var(--poke-red);
+    border-bottom: 4px solid #333;
+    border-radius: 50%;
+    margin: 0 auto 16px;
+}
+
+/* === LISTE JOUEURS === */
+
+.players-section {
+    padding-top: 10px;
+    padding-bottom: 40px;
+}
+
+.pokedex-section {
+    padding-top: 10px;
+    padding-bottom: 40px;
+}
+
+.players-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 10px;
+}
+
+.player-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 16px;
+    background: var(--mc-panel);
+    border: 3px solid var(--mc-slot-border);
+    border-radius: 2px;
+    transition: all 0.15s ease;
+}
+
+.player-card:hover {
+    border-color: var(--color-captured);
+    background: var(--mc-slot);
+    transform: translateY(-2px);
+}
+
+.player-avatar-container {
+    width: 48px;
+    height: 48px;
+    border: 3px solid #000;
+    border-radius: 2px;
+    background: var(--mc-slot);
+    flex-shrink: 0;
+}
+
+.player-avatar {
+    width: 100%;
+    height: 100%;
+    image-rendering: pixelated;
+}
+
+.player-name {
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: var(--mc-text);
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.player-card-arrow {
+    font-size: 0.8rem;
+    color: var(--mc-text-dim);
+    transition: color 0.2s ease;
+}
+
+
+/* === BOUTON RETOUR === */
+
+.btn-back {
+    display: inline-block;
+    padding: 8px 18px;
+    font-size: 0.65rem;
+    font-weight: bold;
+    background: var(--mc-panel);
+    color: var(--mc-text);
+    border: 3px solid var(--mc-slot-border);
+    border-radius: 2px;
+    transition: all 0.15s ease;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+
+/* === PROFIL JOUEUR === */
+
+.player-profile {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding: 24px;
+    background: var(--poke-red);
+    border: 4px solid #000;
+    border-radius: 4px;
+    color: white;
+    margin-bottom: 16px;
+}
+
+.profile-body {
+    width: 100px;
+    height: auto;
+    image-rendering: pixelated;
+    flex-shrink: 0;
+}
+
+.profile-info {
+    flex: 1;
+}
+
+.profile-name {
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin: 0 0 16px;
+    text-transform: uppercase;
+}
+
+.main-stats {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+}
+
+.main-stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 16px;
+    border: 3px solid rgba(0, 0, 0, 0.4);
+    border-radius: 2px;
+    min-width: 80px;
+}
+
+.main-stat-value {
+    font-size: 1rem;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.main-stat-label {
+    font-size: 0.5rem;
+    font-weight: bold;
+    opacity: 0.8;
+    margin-top: 6px;
+    text-transform: uppercase;
+}
+
+.captured-stat {
+    background: rgba(72, 199, 142, 0.15);
+}
+
+.seen-stat {
+    background: rgba(129, 140, 248, 0.15);
+}
+
+.shiny-stat {
+    background: rgba(240, 180, 41, 0.15);
+}
+
+.progress-bar-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 18px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 3px solid rgba(0, 0, 0, 0.4);
+    border-radius: 2px;
+    display: flex;
+}
+
+.progress-fill {
+    height: 100%;
+    transition: width 0.3s ease;
+}
+
+.captured-fill {
+    background: var(--color-captured);
+}
+
+.seen-fill {
+    background: var(--color-seen);
+}
+
+.progress-label {
+    font-size: 0.6rem;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+/* === FILTRES === */
+
+.filters-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    padding: 12px;
+    background: var(--mc-panel);
+    border: 3px solid var(--mc-slot-border);
+    border-radius: 2px;
+    margin-bottom: 14px;
+    align-items: center;
+}
+
+.filters-label {
+    font-size: 0.55rem;
+    font-weight: bold;
+    color: var(--mc-text-dim);
+    margin-right: 6px;
+    text-transform: uppercase;
+}
+
+.filter-btn {
+    padding: 6px 12px;
+    font-size: 0.5rem;
+    font-weight: bold;
+    background: var(--mc-slot);
+    color: var(--mc-text-dim);
+    border: 2px solid var(--mc-slot-border);
+    border-radius: 2px;
+    transition: all 0.15s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-transform: uppercase;
+}
+
+
+.filter-btn.active {
+    background: var(--mc-slot-highlight);
+    border-color: currentColor;
+}
+
+
+.filter-reset {
+    background: #2e1010;
+    color: #f87171;
+    border-color: #5c1a1a;
+}
+
+.filter-count {
+    font-size: 0.5rem;
+    font-weight: bold;
+    opacity: 0.7;
+}
+
+/* === LÉGENDE === */
+
+.legend {
+    display: flex;
+    gap: 16px;
+    padding: 10px 12px;
+    background: var(--mc-panel);
+    border: 2px solid var(--mc-slot-border);
+    border-radius: 2px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.5rem;
+    font-weight: bold;
+    color: var(--mc-text-dim);
+    text-transform: uppercase;
+}
+
+.legend-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+    border: 2px solid #000;
+}
+
+.dot-captured {
+    background: var(--color-captured);
+}
+
+.dot-shiny {
+    background: var(--color-shiny);
+}
+
+.dot-seen {
+    background: var(--color-seen);
+}
+
+.dot-unseen {
+    background: #252538;
+}
+
+/* === COMPTEUR RÉSULTAT === */
+
+.result-count {
+    font-size: 0.55rem;
+    font-weight: bold;
+    color: var(--mc-text-dim);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+/* GRILLE POKÉDEX */
+
+.pokedex-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 4px;
+    padding: 8px;
+    background: var(--mc-slot-border);
+    border: 4px solid #000;
+    border-radius: 2px;
+}
+
+.poke-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px 6px 8px;
+    border: 2px solid;
+    border-radius: 2px;
+    position: relative;
+    min-height: 140px;
+    justify-content: center;
+}
+
+.poke-id {
+    font-size: 0.5rem;
+    font-weight: bold;
+    opacity: 0.5;
+    margin-bottom: 4px;
+}
+
+.poke-sprite-wrap {
+    width: 96px;
+    height: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.poke-sprite {
+    max-width: 100%;
+    max-height: 100%;
+    image-rendering: pixelated;
+}
+
+.poke-name {
+    font-size: 0.5rem;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.3;
+    margin-top: 6px;
+    max-width: 100%;
+    white-space: nowrap;
+    text-transform: uppercase;
+}
+
+/* Badges (shiny, légendaire, alpha) — en haut à droite, empilés */
+
+.poke-badges {
+    position: absolute;
+    top: 4px;
+    right: 5px;
+    display: flex;
+    gap: 1px;
+    align-items: flex-end;
+}
+
+.badge-shiny {
+    color: var(--color-shiny);
+}
+
+.badge-legendary {
+    color: var(--color-legendary);
+}
+
+.badge-alpha {
+    color: var(--color-alpha);
+}
+
+/* --- Capturé --- */
+.status-captured {
+    background: var(--color-captured-bg);
+    border-color: var(--color-captured-border);
+}
+
+.status-captured .poke-id,
+.status-captured .poke-name {
+    color: var(--color-captured);
+}
+
+/* --- Capturé Shiny --- */
+.status-captured-shiny {
+    background: var(--color-shiny-bg);
+    border-color: var(--color-shiny-border);
+}
+
+.status-captured-shiny .poke-id,
+.status-captured-shiny .poke-name {
+    color: var(--color-shiny);
+}
+
+/* --- Vu --- */
+.status-seen {
+    background: var(--color-seen-bg);
+    border-color: var(--color-seen-border);
+}
+
+.status-seen .poke-id,
+.status-seen .poke-name {
+    color: var(--color-seen);
+}
+
+/* --- Non vu --- */
+.status-unseen {
+    background: var(--color-unseen-bg);
+    border-color: var(--color-unseen-border);
+}
+
+.status-unseen .poke-id, .status-unseen .poke-name {
+    color: #444460;
+}
+
+.status-unseen .poke-sprite {
+    filter: brightness(0);
+    opacity: 0.15;
+}
+
+/* === RESPONSIVE === */
+
+@media (max-width: 768px) {
+    .cobblemon-header h1 {
+        font-size: 1.2rem;
+    }
+
+    .cobblemon-subtitle {
+        font-size: 0.5rem;
+    }
+
+    .player-profile {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+        padding: 20px 14px;
+    }
+
+    .profile-body {
+        width: 80px;
+    }
+
+    .profile-name {
+        font-size: 0.8rem;
+    }
+
+    .main-stats {
+        justify-content: center;
+    }
+
+    .main-stat {
+        min-width: 70px;
+        padding: 8px 12px;
+    }
+
+    .main-stat-value {
+        font-size: 0.8rem;
+    }
+
+    .players-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pokedex-grid {
+        grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+        gap: 3px;
+        padding: 5px;
+    }
+
+    .poke-cell {
+        min-height: 120px;
+    }
+
+    .poke-sprite-wrap {
+        width: 72px;
+        height: 72px;
+    }
+
+    .filters-bar {
+        gap: 4px;
+        padding: 8px;
+    }
+
+    .filter-btn {
+        padding: 6px 10px;
+        font-size: 0.45rem;
+    }
+}

@@ -1,12 +1,14 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, NavigationEnd, RouterLink, RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterLink, RouterOutlet],
+  imports: [CommonModule, RouterLink, RouterOutlet],
   template: `
     <main>
-      <header class="navbar">
+      <header class="navbar" *ngIf="!isFullscreenRoute">
         <a class="brand" [routerLink]="['/']">
           <img src="/assets/angular.svg" alt="Logo" class="logo" />
           <span class="brand-name">Loïs Odiardo</span>
@@ -21,7 +23,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
           </ul>
         </nav>
       </header>
-      <section class="content">
+      <section class="content" [class.fullscreen]="isFullscreenRoute">
         <router-outlet></router-outlet>
       </section>
     </main>
@@ -30,4 +32,18 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 })
 export class AppComponent {
   title = 'portfolio';
+  isFullscreenRoute = false;
+
+  private router = inject(Router);
+
+  // Routes qui prennent toute la page (sans navbar)
+  private fullscreenRoutes = ['/cobblemon'];
+
+  constructor() {
+    this.router.events.pipe(
+        filter((e): e is NavigationEnd => e instanceof NavigationEnd)
+    ).subscribe(e => {
+      this.isFullscreenRoute = this.fullscreenRoutes.some(r => e.urlAfterRedirects.startsWith(r));
+    });
+  }
 }

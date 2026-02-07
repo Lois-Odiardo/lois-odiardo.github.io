@@ -1,0 +1,41 @@
+{
+  "uuid": "160c34bc-0715-4231-aaff-11c1dfdb06ed",
+  "starterPrompted": true,
+  "starterLocked": false,
+  "starterSelected": true,
+  "starterUUID": "4f6c8431-6055-4ba9-9b4b-8e43e0d2883f",
+  "keyItems": [],
+  "battleTheme": "cobblemon:battle.pvp.default",
+  "extraData": {},
+  "advancementData": {
+    "totalCaptureCount": 2,
+    "totalEggsCollected": 0,
+    "totalEggsHatched": 0,
+    "totalEvolvedCount": 0,
+    "totalBattleVictoryCount": 4,
+    "totalPvPBattleVictoryCount": 0,
+    "totalPvWBattleVictoryCount": 4,
+    "totalPvNBattleVictoryCount": 0,
+    "totalShinyCaptureCount": 0,
+    "totalTradedCount": 0,
+    "totalTypeCaptureCounts": {
+      "normal": 1,
+      "bug": 1
+    },
+    "totalDefeatedCounts": {
+      "cobblemon:hoppip": 1,
+      "cobblemon:poochyena": 1,
+      "cobblemon:koffing": 1,
+      "cobblemon:rattata": 1
+    },
+    "aspectsCollected": {
+      "cobblemon:miltank": [
+        "female",
+        "milkable"
+      ],
+      "cobblemon:nymble": [
+        "female"
+      ]
+    }
+  }
+}

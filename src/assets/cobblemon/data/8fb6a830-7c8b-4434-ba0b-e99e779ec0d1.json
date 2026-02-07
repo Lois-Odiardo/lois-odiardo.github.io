@@ -1,0 +1,55 @@
+{
+  "uuid": "8fb6a830-7c8b-4434-ba0b-e99e779ec0d1",
+  "starterPrompted": true,
+  "starterLocked": false,
+  "starterSelected": true,
+  "starterUUID": "9c6b2a74-7e00-45a7-b3e7-06a7c06d457f",
+  "keyItems": [],
+  "battleTheme": "cobblemon:battle.pvp.default",
+  "extraData": {},
+  "advancementData": {
+    "totalCaptureCount": 6,
+    "totalEggsCollected": 0,
+    "totalEggsHatched": 0,
+    "totalEvolvedCount": 0,
+    "totalBattleVictoryCount": 4,
+    "totalPvPBattleVictoryCount": 0,
+    "totalPvWBattleVictoryCount": 4,
+    "totalPvNBattleVictoryCount": 0,
+    "totalShinyCaptureCount": 0,
+    "totalTradedCount": 0,
+    "totalTypeCaptureCounts": {
+      "poison": 1,
+      "bug": 1,
+      "dark": 1,
+      "normal": 1,
+      "rock": 1,
+      "electric": 1
+    },
+    "totalDefeatedCounts": {
+      "cobblemon:buneary": 1,
+      "cobblemon:gimmighoul": 1
+    },
+    "aspectsCollected": {
+      "cobblemon:koffing": [
+        "female"
+      ],
+      "cobblemon:blipbug": [
+        "male"
+      ],
+      "cobblemon:purrloin": [
+        "male"
+      ],
+      "cobblemon:zangoose": [
+        "male"
+      ],
+      "cobblemon:rockruff": [
+        "female",
+        "midday-form"
+      ],
+      "cobblemon:yamper": [
+        "male"
+      ]
+    }
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "uuid": "7f2a2949-94b2-4371-8328-72d9d82af36d",
+  "starterPrompted": true,
+  "starterLocked": false,
+  "starterSelected": true,
+  "starterUUID": "6deca6eb-26c2-4a35-beec-b4efdad48ff5",
+  "keyItems": [],
+  "battleTheme": "cobblemon:battle.pvp.default",
+  "extraData": {},
+  "advancementData": {
+    "totalCaptureCount": 21,
+    "totalEggsCollected": 0,
+    "totalEggsHatched": 0,
+    "totalEvolvedCount": 3,
+    "totalBattleVictoryCount": 21,
+    "totalPvPBattleVictoryCount": 0,
+    "totalPvWBattleVictoryCount": 21,
+    "totalPvNBattleVictoryCount": 0,
+    "totalShinyCaptureCount": 2,
+    "totalTradedCount": 2,
+    "totalTypeCaptureCounts": {
+      "normal": 5,
+      "psychic": 1,
+      "fairy": 3,
+      "dark": 4,
+      "fire": 1,
+      "water": 7,
+      "flying": 1,
+      "poison": 1,
+      "grass": 2,
+      "electric": 1,
+      "ghost": 1
+    },
+    "totalDefeatedCounts": {
+      "cobblemon:purrloin": 1,
+      "cobblemon:ponyta": 1,
+      "cobblemon:eldegoss": 1,
+      "cobblemon:swellow": 1,
+      "cobblemon:jigglypuff": 1,
+      "cobblemon:ferrothorn": 1,
+      "cobblemon:mudsdale": 1,
+      "cobblemon:fomantis": 1
+    },
+    "aspectsCollected": {
+      "cobblemon:patrat": [
+        "female"
+      ],
+      "cobblemon:delphox": [
+        "male"
+      ],
+      "cobblemon:arcanine": [
+        "male"
+      ],
+      "cobblemon:bouffalant": [
+        "female"
+      ],
+      "cobblemon:ponyta": [
+        "male",
+        "galarian"
+      ],
+      "cobblemon:dachsbun": [
+        "male"
+      ],
+      "cobblemon:houndour": [
+        "female"
+      ],
+      "cobblemon:swanna": [
+        "male"
+      ],
+      "cobblemon:zangoose": [
+        "male"
+      ],
+      "cobblemon:mareanie": [
+        "female"
+      ],
+      "cobblemon:rapidash": [
+        "male",
+        "galarian"
+      ],
+      "cobblemon:arboliva": [
+        "female"
+      ],
+      "cobblemon:yamper": [
+        "male"
+      ],
+      "cobblemon:purrloin": [
+        "female"
+      ],
+      "cobblemon:persian": [
+        "female"
+      ],
+      "cobblemon:togepi": [
+        "male"
+      ],
+      "cobblemon:jellicent": [
+        "female"
+      ],
+      "cobblemon:finizen": [
+        "female"
+      ],
+      "cobblemon:magikarp": [
+        "shiny",
+        "female",
+        "gyarados-eye-color-red"
+      ],
+      "cobblemon:arrokuda": [
+        "shiny",
+        "male"
+      ],
+      "cobblemon:sharpedo": [
+        "male"
+      ],
+      "cobblemon:thievul": [
+        "male"
+      ],
+      "cobblemon:lurantis": [
+        "female"
+      ]
+    }
+  }
+}
