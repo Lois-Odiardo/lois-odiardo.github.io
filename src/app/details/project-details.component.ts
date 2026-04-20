@@ -1,5 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Project } from '../project';
 import { ProjectService } from '../project.service';
@@ -7,24 +6,24 @@ import { ProjectService } from '../project.service';
 @Component({
   selector: 'app-project-details',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   template: `
     <div class="details-container">
-      <!-- Error state -->
-      <div *ngIf="error && !loading" class="error-container">
-        <h2>Erreur</h2>
-        <p>{{ error }}</p>
-        <a class="back-button" (click)="goBack()">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M19 12H5M12 19l-7-7 7-7"/>
-          </svg>
-          Retour aux projets
-        </a>
-      </div>
 
-      <!-- Project content -->
-      <div *ngIf="project && !loading">
-        <!-- Back button -->
+      @if (error() && !loading()) {
+        <div class="error-container">
+          <h2>Erreur</h2>
+          <p>{{ error() }}</p>
+          <a class="back-button" (click)="goBack()">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M19 12H5M12 19l-7-7 7-7"/>
+            </svg>
+            Retour aux projets
+          </a>
+        </div>
+      }
+
+      @if (project() && !loading()) {
         <a class="back-button" (click)="goBack()">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M19 12H5M12 19l-7-7 7-7"/>
@@ -32,29 +31,29 @@ import { ProjectService } from '../project.service';
           Retour
         </a>
 
-        <!-- Project header -->
         <div class="details-header">
           <div class="header-content">
             <div class="title-section">
-              <h1 class="project-name">{{ project.name }}</h1>
+              <h1 class="project-name">{{ project()!.name }}</h1>
               <div class="project-meta">
-                <span class="meta-badge" [class.status-ongoing]="project.state === 'En cours'" [class.status-completed]="project.state === 'Terminé'">
-                  {{ project.state }}
+                <span class="meta-badge"
+                      [class.status-ongoing]="project()!.state === 'En cours'"
+                      [class.status-completed]="project()!.state === 'Terminé'">
+                  {{ project()!.state }}
                 </span>
                 <span class="meta-badge category">
-                  {{ getCategoryIcon() }} {{ project.categorie }}
+                  {{ getCategoryIcon() }} {{ project()!.categorie }}
                 </span>
               </div>
             </div>
             <div class="project-image-wrapper">
-              <img [src]="project.photo" [alt]="project.name" class="project-hero-image" />
+              <img [src]="project()!.photo" [alt]="project()!.name" class="project-hero-image" />
             </div>
           </div>
         </div>
 
-        <!-- Details grid -->
         <div class="details-grid">
-          <!-- Technologies - Full width -->
+
           <div class="info-card full-width">
             <div class="card-header">
               <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -64,13 +63,12 @@ import { ProjectService } from '../project.service';
               <h2>Technologies</h2>
             </div>
             <div class="tech-tags">
-              <span *ngFor="let tech of getTechnologies()" class="tech-tag">
-                {{ tech }}
-              </span>
+              @for (tech of technologies(); track tech) {
+                <span class="tech-tag">{{ tech }}</span>
+              }
             </div>
           </div>
 
-          <!-- Informations - Full width -->
           <div class="info-card full-width">
             <div class="card-header">
               <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -81,13 +79,15 @@ import { ProjectService } from '../project.service';
               <h2>Informations</h2>
             </div>
             <div class="card-content">
-              <p><strong>Rôle :</strong> {{ project.role }}</p>
-              <p><strong>Cadre :</strong> {{ project.cadre }}</p>
-              <p><strong>Période :</strong> {{ formatDate(project.dateDebut) }} - {{ project.dateFin ? formatDate(project.dateFin) : 'En cours' }}</p>
+              <p><strong>Rôle :</strong> {{ project()!.role }}</p>
+              <p><strong>Cadre :</strong> {{ project()!.cadre }}</p>
+              <p><strong>Période :</strong>
+                {{ formatDate(project()!.dateDebut) }} -
+                {{ project()!.dateFin ? formatDate(project()!.dateFin) : 'En cours' }}
+              </p>
             </div>
           </div>
 
-          <!-- Description -->
           <div class="info-card full-width">
             <div class="card-header">
               <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -98,10 +98,9 @@ import { ProjectService } from '../project.service';
               </svg>
               <h2>Description</h2>
             </div>
-            <p class="card-content description">{{ project.description }}</p>
+            <p class="card-content description">{{ project()!.description }}</p>
           </div>
 
-          <!-- Contribution -->
           <div class="info-card full-width">
             <div class="card-header">
               <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -110,92 +109,104 @@ import { ProjectService } from '../project.service';
               </svg>
               <h2>Ma contribution</h2>
             </div>
-            <p class="card-content description">{{ project.contribution }}</p>
+            <p class="card-content description">{{ project()!.contribution }}</p>
           </div>
 
-          <!-- Key points -->
-          <div class="info-card full-width" *ngIf="project.cles && project.cles.length > 0">
-            <div class="card-header">
-              <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <polyline points="20 6 9 17 4 12"></polyline>
-              </svg>
-              <h2>Points clés</h2>
-            </div>
-            <ul class="key-points">
-              <li *ngFor="let cle of project.cles" class="key-point">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <polyline points="9 11 12 14 22 4"></polyline>
-                  <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+          @if ((project()!.cles?.length ?? 0) > 0) {
+            <div class="info-card full-width">
+              <div class="card-header">
+                <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <polyline points="20 6 9 17 4 12"></polyline>
                 </svg>
-                {{ cle }}
-              </li>
-            </ul>
-          </div>
+                <h2>Points clés</h2>
+              </div>
+              <ul class="key-points">
+                @for (cle of project()!.cles; track cle) {
+                  <li class="key-point">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polyline points="9 11 12 14 22 4"></polyline>
+                      <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                    </svg>
+                    {{ cle }}
+                  </li>
+                }
+              </ul>
+            </div>
+          }
 
-          <!-- Links -->
-          <div class="info-card full-width" *ngIf="project.liens && project.liens.length > 0">
-            <div class="card-header">
-              <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-                <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-              </svg>
-              <h2>Liens</h2>
-            </div>
-            <div class="project-links">
-              <a *ngFor="let lien of project.liens" [href]="lien" target="_blank" rel="noopener noreferrer" class="external-link">
-                {{ getLinkText(lien) }}
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-                  <polyline points="15 3 21 3 21 9"></polyline>
-                  <line x1="10" y1="14" x2="21" y2="3"></line>
+          @if ((project()!.liens?.length ?? 0) > 0) {
+            <div class="info-card full-width">
+              <div class="card-header">
+                <svg class="card-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                  <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
                 </svg>
-              </a>
+                <h2>Liens</h2>
+              </div>
+              <div class="project-links">
+                @for (lien of project()!.liens; track lien) {
+                  <a [href]="lien" target="_blank" rel="noopener noreferrer" class="external-link">
+                    {{ getLinkText(lien) }}
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                      <polyline points="15 3 21 3 21 9"></polyline>
+                      <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                  </a>
+                }
+              </div>
             </div>
-          </div>
+          }
+
         </div>
-      </div>
+      }
     </div>
   `,
   styleUrls: ['./project-details.component.css']
 })
 export class ProjectDetailsComponent implements OnInit {
-  route: ActivatedRoute = inject(ActivatedRoute);
-  router: Router = inject(Router);
-  projectService: ProjectService = inject(ProjectService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  private projectService = inject(ProjectService);
 
-  project: Project | null = null;
-  loading: boolean = true;
-  error: string | null = null;
+  project = signal<Project | null>(null);
+  loading = signal(true);
+  error = signal<string | null>(null);
+
+  technologies = computed<string[]>(() => {
+    const technologie = this.project()?.technologie;
+    return technologie ? technologie.split(',').map(t => t.trim()) : [];
+  });
 
   ngOnInit(): void {
     const projectId = Number(this.route.snapshot.params['id']);
 
     if (isNaN(projectId)) {
-      this.error = 'ID de projet invalide';
-      this.loading = false;
+      this.error.set('ID de projet invalide');
+      this.loading.set(false);
       return;
     }
 
     this.loadProject(projectId);
   }
 
-  loadProject(projectId: number): void {
-    this.loading = true;
-    this.error = null;
+  private loadProject(projectId: number): void {
+    this.loading.set(true);
+    this.error.set(null);
 
     this.projectService.getProjectById(projectId).subscribe({
       next: (project) => {
         if (project) {
-          this.project = project;
+          this.project.set(project);
         } else {
-          this.error = 'Projet non trouvé';
+          this.error.set('Projet non trouvé');
         }
-        this.loading = false;
+        this.loading.set(false);
       },
-      error: (err) => {
+      error: (err: unknown) => {
         console.error('Erreur lors du chargement du projet:', err);
-        this.error = 'Impossible de charger le projet. Vérifiez votre connexion.';
-        this.loading = false;
+        this.error.set('Impossible de charger le projet. Vérifiez votre connexion.');
+        this.loading.set(false);
       }
     });
   }
@@ -204,24 +215,17 @@ export class ProjectDetailsComponent implements OnInit {
     this.router.navigate(['/projects']);
   }
 
-  getTechnologies(): string[] {
-    if (!this.project) return [];
-    return this.project.technologie.split(',').map(tech => tech.trim());
-  }
-
   getCategoryIcon(): string {
-    if (!this.project) return '';
-    const iconMap: { [key: string]: string } = {
+    const iconMap: Record<string, string> = {
       'Universitaires': '🎓',
       'Professionnels': '💼',
       'Personnels': '🎨'
     };
-    return iconMap[this.project.categorie] || '';
+    return iconMap[this.project()?.categorie ?? ''] ?? '';
   }
 
   formatDate(dateStr: string | undefined): string {
     if (!dateStr) return '';
-
     try {
       const [year, month] = dateStr.split('-');
       const months = [
@@ -229,20 +233,15 @@ export class ProjectDetailsComponent implements OnInit {
         'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'
       ];
       const monthIndex = parseInt(month) - 1;
-
-      if (monthIndex >= 0 && monthIndex < 12) {
-        return `${months[monthIndex]} ${year}`;
-      }
-      return dateStr;
+      return (monthIndex >= 0 && monthIndex < 12) ? `${months[monthIndex]} ${year}` : dateStr;
     } catch {
-      return dateStr || '';
+      return dateStr;
     }
   }
 
   getLinkText(url: string): string {
     try {
-      const urlObj = new URL(url);
-      return urlObj.hostname.replace('www.', '');
+      return new URL(url).hostname.replace('www.', '');
     } catch {
       return url;
     }

@@ -8,34 +8,34 @@
   "battleTheme": "cobblemon:battle.pvp.default",
   "extraData": {},
   "advancementData": {
-    "totalCaptureCount": 135,
+    "totalCaptureCount": 167,
     "totalEggsCollected": 0,
     "totalEggsHatched": 0,
-    "totalEvolvedCount": 20,
-    "totalBattleVictoryCount": 169,
+    "totalEvolvedCount": 28,
+    "totalBattleVictoryCount": 186,
     "totalPvPBattleVictoryCount": 0,
-    "totalPvWBattleVictoryCount": 169,
+    "totalPvWBattleVictoryCount": 186,
     "totalPvNBattleVictoryCount": 0,
-    "totalShinyCaptureCount": 9,
+    "totalShinyCaptureCount": 15,
     "totalTradedCount": 2,
     "totalTypeCaptureCounts": {
-      "water": 28,
-      "flying": 24,
-      "grass": 19,
-      "bug": 17,
-      "fairy": 14,
+      "water": 33,
+      "flying": 27,
+      "grass": 23,
+      "bug": 25,
+      "fairy": 15,
       "ice": 10,
-      "ghost": 13,
-      "psychic": 15,
-      "normal": 12,
+      "ghost": 16,
+      "psychic": 17,
+      "normal": 15,
       "ground": 8,
-      "steel": 7,
-      "fighting": 4,
-      "fire": 5,
-      "dark": 6,
-      "dragon": 2,
-      "poison": 4,
-      "electric": 8,
+      "steel": 9,
+      "fighting": 8,
+      "fire": 6,
+      "dark": 10,
+      "dragon": 4,
+      "poison": 8,
+      "electric": 10,
       "rock": 6
     },
     "totalDefeatedCounts": {
@@ -97,7 +97,15 @@
       "cobblemon:trapinch": 1,
       "cobblemon:fidough": 1,
       "cobblemon:varoom": 1,
-      "cobblemon:rufflet": 1
+      "cobblemon:rufflet": 1,
+      "cobblemon:poltchageist": 1,
+      "cobblemon:spiritomb": 1,
+      "cobblemon:roselia": 1,
+      "cobblemon:lurantis": 1,
+      "cobblemon:wooloo": 1,
+      "cobblemon:granbull": 1,
+      "cobblemon:tandemaus": 1,
+      "cobblemon:ariados": 1
     },
     "aspectsCollected": {
       "cobblemon:ducklett": [
@@ -318,7 +326,8 @@
       ],
       "cobblemon:shellos": [
         "male",
-        "west-sea"
+        "west-sea",
+        "female"
       ],
       "cobblemon:mantyke": [
         "female"
@@ -518,7 +527,8 @@
         "male"
       ],
       "cobblemon:slugma": [
-        "male"
+        "male",
+        "female"
       ],
       "cobblemon:exeggutor": [
         "male"
@@ -577,6 +587,129 @@
       ],
       "cobblemon:noibat": [
         "male"
+      ],
+      "cobblemon:venomoth": [
+        "female"
+      ],
+      "cobblemon:floette": [
+        "female",
+        "flower-red"
+      ],
+      "cobblemon:caterpie": [
+        "male"
+      ],
+      "cobblemon:pawniard": [
+        "male"
+      ],
+      "cobblemon:timburr": [
+        "male"
+      ],
+      "cobblemon:tauros": [
+        "male",
+        "paldean",
+        "combat-breed"
+      ],
+      "cobblemon:ledyba": [
+        "female",
+        "shiny",
+        "male"
+      ],
+      "cobblemon:swadloon": [
+        "male"
+      ],
+      "cobblemon:shelmet": [
+        "female"
+      ],
+      "cobblemon:illumise": [
+        "female"
+      ],
+      "cobblemon:dreepy": [
+        "male"
+      ],
+      "cobblemon:gastly": [
+        "shiny",
+        "male"
+      ],
+      "cobblemon:tympole": [
+        "shiny",
+        "male"
+      ],
+      "cobblemon:paras": [
+        "shiny",
+        "male"
+      ],
+      "cobblemon:foongus": [
+        "male"
+      ],
+      "cobblemon:arbok": [
+        "male",
+        "snake-pattern-sound"
+      ],
+      "cobblemon:bewear": [
+        "male"
+      ],
+      "cobblemon:eevee": [
+        "female"
+      ],
+      "cobblemon:haunter": [
+        "shiny",
+        "male"
+      ],
+      "cobblemon:electrike": [
+        "shiny",
+        "male"
+      ],
+      "cobblemon:suicune": [
+        "genderless"
+      ],
+      "cobblemon:crabrawler": [
+        "shiny",
+        "male"
+      ],
+      "cobblemon:gengar": [
+        "shiny",
+        "male"
+      ],
+      "cobblemon:vileplume": [
+        "shiny",
+        "female"
+      ],
+      "cobblemon:togekiss": [
+        "male"
+      ],
+      "cobblemon:mismagius": [
+        "female"
+      ],
+      "cobblemon:jolteon": [
+        "female"
+      ],
+      "cobblemon:polteageist": [
+        "genderless",
+        "phony"
+      ],
+      "cobblemon:slowking": [
+        "female"
+      ],
+      "cobblemon:gyarados": [
+        "male",
+        "gyarados-eye-color-purple"
+      ],
+      "cobblemon:weepinbell": [
+        "shiny",
+        "male"
+      ],
+      "cobblemon:magneton": [
+        "genderless"
+      ],
+      "cobblemon:raticate": [
+        "male",
+        "alolan"
+      ],
+      "cobblemon:zweilous": [
+        "male"
+      ],
+      "cobblemon:celebi": [
+        "genderless"
       ]
     }
   }

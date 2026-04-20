@@ -8,34 +8,35 @@
   "battleTheme": "cobblemon:battle.pvp.default",
   "extraData": {},
   "advancementData": {
-    "totalCaptureCount": 58,
+    "totalCaptureCount": 88,
     "totalEggsCollected": 0,
     "totalEggsHatched": 0,
-    "totalEvolvedCount": 13,
-    "totalBattleVictoryCount": 67,
+    "totalEvolvedCount": 15,
+    "totalBattleVictoryCount": 99,
     "totalPvPBattleVictoryCount": 1,
-    "totalPvWBattleVictoryCount": 66,
+    "totalPvWBattleVictoryCount": 98,
     "totalPvNBattleVictoryCount": 0,
     "totalShinyCaptureCount": 10,
-    "totalTradedCount": 7,
+    "totalTradedCount": 10,
     "totalTypeCaptureCounts": {
       "electric": 2,
-      "poison": 6,
-      "water": 4,
-      "fire": 8,
+      "poison": 9,
+      "water": 11,
+      "fire": 17,
       "bug": 7,
-      "flying": 7,
-      "normal": 12,
-      "ghost": 5,
-      "grass": 6,
-      "fighting": 4,
-      "psychic": 5,
+      "flying": 9,
+      "normal": 14,
+      "ghost": 10,
+      "grass": 9,
+      "fighting": 6,
+      "psychic": 8,
       "ground": 5,
-      "dark": 4,
-      "rock": 4,
+      "dark": 6,
+      "rock": 5,
       "steel": 4,
-      "dragon": 2,
-      "ice": 1
+      "dragon": 6,
+      "ice": 1,
+      "fairy": 2
     },
     "totalDefeatedCounts": {
       "cobblemon:sentret": 1,
@@ -64,7 +65,14 @@
       "cobblemon:stonjourner": 1,
       "cobblemon:fomantis": 1,
       "cobblemon:swellow": 1,
-      "cobblemon:shuppet": 2
+      "cobblemon:shuppet": 2,
+      "cobblemon:calyrex": 1,
+      "cobblemon:regieleki": 1,
+      "cobblemon:annihilape": 1,
+      "cobblemon:gastly": 1,
+      "cobblemon:magmortar": 1,
+      "cobblemon:basculegion": 1,
+      "cobblemon:machamp": 1
     },
     "aspectsCollected": {
       "cobblemon:raboot": [
@@ -83,7 +91,8 @@
         "male"
       ],
       "cobblemon:arcanine": [
-        "male"
+        "male",
+        "hisuian"
       ],
       "cobblemon:mareep": [
         "female"
@@ -306,6 +315,114 @@
       ],
       "cobblemon:jirachi": [
         "genderless"
+      ],
+      "cobblemon:spectrier": [
+        "genderless"
+      ],
+      "cobblemon:calyrex": [
+        "genderless"
+      ],
+      "cobblemon:zacian": [
+        "genderless",
+        "hero"
+      ],
+      "cobblemon:typenull": [
+        "genderless"
+      ],
+      "cobblemon:regidrago": [
+        "genderless"
+      ],
+      "cobblemon:eternatus": [
+        "genderless"
+      ],
+      "cobblemon:kingdra": [
+        "male"
+      ],
+      "cobblemon:salandit": [
+        "male"
+      ],
+      "cobblemon:fluttermane": [
+        "genderless"
+      ],
+      "cobblemon:houndour": [
+        "female"
+      ],
+      "cobblemon:fuecoco": [
+        "male"
+      ],
+      "cobblemon:wailmer": [
+        "female"
+      ],
+      "cobblemon:basculegion": [
+        "male",
+        "alpha"
+      ],
+      "cobblemon:gorebyss": [
+        "female",
+        "alpha"
+      ],
+      "cobblemon:shroomish": [
+        "female",
+        "male"
+      ],
+      "cobblemon:breloom": [
+        "female"
+      ],
+      "cobblemon:necrozma": [
+        "genderless"
+      ],
+      "cobblemon:octillery": [
+        "male",
+        "alpha"
+      ],
+      "cobblemon:dondozo": [
+        "male",
+        "alpha"
+      ],
+      "cobblemon:gyarados": [
+        "male",
+        "gyarados-eye-color-purple",
+        "alpha"
+      ],
+      "cobblemon:wailord": [
+        "female",
+        "alpha"
+      ],
+      "cobblemon:dhelmise": [
+        "genderless"
+      ],
+      "cobblemon:exploud": [
+        "female",
+        "alpha"
+      ],
+      "cobblemon:incineroar": [
+        "male",
+        "alpha"
+      ],
+      "cobblemon:salazzle": [
+        "female",
+        "alpha"
+      ],
+      "cobblemon:machamp": [
+        "male",
+        "alpha"
+      ],
+      "cobblemon:delphox": [
+        "male",
+        "alpha"
+      ],
+      "cobblemon:dragonite": [
+        "female",
+        "alpha"
+      ],
+      "cobblemon:turtonator": [
+        "female",
+        "alpha"
+      ],
+      "cobblemon:darmanitan": [
+        "male",
+        "standard-mode",
+        "alpha"
       ]
     }
   }

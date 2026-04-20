@@ -1,10 +1,9 @@
-import {Component, inject, Input} from '@angular/core';
-import {CommonModule} from "@angular/common";
-import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-learn-component',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [RouterLink],
   template: `
     <section>
       <p>Voici mon portfolio d'apprentissage. Il résume l'ensemble des apprentissages associés aux travaux que j'ai réalisés durant ma formation à l'IUT.</p>
@@ -32,9 +31,9 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
       <p>Niveau d'acquisition : 3</p>
       <br>
       <div>
-        <button class="button" onclick="location.href='/details/0'">Portfolio</button>
+        <button class="button" [routerLink]="['/details', 3]">Portfolio</button>
       </div><br>
-      
+
       <br>
       <strong>AC 2 : </strong>Faire évoluer une application existante
       <br>
@@ -56,7 +55,7 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
       <p>Niveau d'acquisition : 4</p>
       <br>
       <div>
-        <button class="button" onclick="location.href='/details/2'">Exige - new front</button>
+        <button class="button" [routerLink]="['/details', 6]">Exige - New Front</button>
       </div><br>
 
       <br>
@@ -76,7 +75,7 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
       <p>Niveau d'acquisition : 4</p>
       <br>
       <div>
-        <button class="button" onclick="location.href='/details/6'">Stage 2022-23</button>
+        <button class="button" [routerLink]="['/details', 11]">Stage Netia</button>
       </div><br>
 
       <span class="blue">Partie Optimiser :</span>
@@ -102,10 +101,10 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
       <p>Niveau d'acquisition : 3</p>
       <br>
       <div>
-        <button class="button" onclick="location.href='/details/8'">Nyavigator</button>
+        <button class="button" [routerLink]="['/details', 10]">Nyavigator</button>
       </div><br>
 
-      <br><strong>AC 5 : </strong>Profiler, analyser et justifier le comportement d’un code existant
+      <br><strong>AC 5 : </strong>Profiler, analyser et justifier le comportement d'un code existant
       <br>
       <br>
       <p><strong>Composantes essentielles liées</strong> :</p>
@@ -115,54 +114,28 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
       <p>Cet apprentissage critique a été vu entre autre lors de ma SAE Nyavigator de 2ème année de BUT.</p>
       <p>Le sujet était de chercher le chemin le plus court entre deux villes en France avec un temps d'exécution le plus court possible.</p>
       <p>Pour chercher le chemin le plus court, j'ai utilisé plusieurs algorithmes.</p>
-      <p>J'ai initialement implémenté l’algorithme de Dijkstra. Cet algorithme recherche les voisins d'un point en largeur dans un graphe non orienté à partir de ce point.</p>
+      <p>J'ai initialement implémenté l'algorithme de Dijkstra. Cet algorithme recherche les voisins d'un point en largeur dans un graphe non orienté à partir de ce point.</p>
       <p>Ainsi, une représentation de cette méthode de recherche serait un cercle, partant du point de départ, dont on augmente graduellement le rayon. Cette solution est acceptable dans la plupart des cas.</p>
       <p>Le profilage de cette solution montre que l'on peut y apporter des améliorations.</p>
       <br>
-      <div class="image-container img-group-4">
-        <img src="assets/Dijkstra.gif" alt="Gif algorithme Dijkstra">
+      <div class="image-container img-group-3">
+        <img src="assets/nyavigator.png" alt="Photo d'utilisation de nyavigator">
       </div>
-      <p>La première amélioration a consisté à implémenter l’algorithme A*.</p>
-      <p>Cet algorithme modifie l’évaluation des distances sur le graphe en additionnant un paramètre, nommé heuristique, à la somme des distances des arrêtes.</p>
-      <p>Une représentation de cette méthode de recherche serait le vol d'un oiseau en direction d'une cible qu'il ne perdrait pas de vue en cas d'obstacle.</p>
-      <p>A* s'étend donc en ligne droite, élargie son champ d'action si elle rencontre l'équivalent d'une butée, puis reprend le vol d'oiseau lorsque la butée est passée.</p>
-      <p>A* est donc intrasectement plus efficace que Dijkstra.</p>
-      <p>Il n'en reste pas moins que l'algorithme A* peut être optimisé car il continue à chercher le chemin le plus court dans plusieurs directions simultanées.</p>
-      <div class="image-container img-group-4">
-        <img src="assets/Astar.gif" alt="Gif algorithme A*">
-      </div>
-      
-      <p>La seconde amélioration a consisté à agir sur le paramètre heuristique de A*.</p>
-      <p>Pour réaliser cette optimisation, on a choisi d'utiliser WA*. Cet algorithme introduit un coefficient, appelé poids, à l'heuristique. Cette méthode simule la notion de priorité aux trajets directs.</p>
-      <p>L'algorithme WA*, revient à faire un compromis entre précision de calcul et vitesse d'exécution de celui-ci.</p>
-      <div class="image-container img-group-4">
-        <img src="assets/WAstar.gif" alt="Gif algorithme WA*">
-      </div>
-      <p>Le profilage, l'analyse du code à chaque étape, et le choix de paramètre adéquat ont permis d'optimiser le développement et d'obtenir un résultat répondant au cahier des charges.</p>
-      <br>
       <br>
       <p>Niveau d'acquisition : 3</p>
       <br>
       <div>
-        <button class="button" onclick="location.href='/details/8'">Nyavigator</button>
+        <button class="button" [routerLink]="['/details', 10]">Nyavigator</button>
       </div><br>
 
-      <br><strong>AC 6 : </strong>Choisir et utiliser des bibliothèques dédiées au domaine d’application
+      <br><strong>AC 6 : </strong>Choisir des bibliothèques et méthodes dédiées au domaine
       <br>
       <br>
-      <p><strong>Composante essentielle liée</strong> :</p>
+      <p><strong>Composantes essentielles liées</strong> :</p>
+      <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.03 - S'appuyer sur des schémas de raisonnement</p>
       <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2.04 - Justifier les choix et valider les résultats</p>
       <br>
-      <p>Cet apprentissage critique a été vu au travers des différents projets tout au long du BUT.</p>
-      <p>Les bibliothèques sont des outils d'aide au développement que j'ai été ammené à choisir et utiliser pour développer des solutions adaptées aux besoins spécifiques de mes différents projets.</p>
-      <br>
-      <p>A titre d'exemple, parmis ces bibliothèques, nous pouvons retrouver Doctrine et Twig :</p>
-      <br>
-      <p>Doctrine m'a permis d'interagir avec la base de données de l'un de mes projets de manière efficace et sécurisée. Il m'a permis de mettre en oeuvre des relations entre entités (ManyToMany, OneToMany, etc...). J'ai également utilisé Doctrine pour réaliser des migrations afin de gérer l'évolution de ma base de données sans perte de données.</p>
-      <br>
-      <p>Twig m'a permis de structurer les différentes vues de mon projet en séparant distinctement la logique métier et le rendu visuel grâce à ses fonctionnalité d'héritage, de filtres et d'extensions.</p>
-      <br>
-      <div class="image-container img-group-3">
+      <div class="image-container img-group-4">
         <img src="assets/twig.png" alt="Image d'utilisation de Twig">
         <img src="assets/the_feed.png" alt="Image de The feed">
       </div>
@@ -172,7 +145,7 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
       <p>Niveau d'acquisition : 4</p>
       <br>
       <div>
-        <button class="button" onclick="location.href='/details/2'">Exige - new front</button>
+        <button class="button" [routerLink]="['/details', 6]">Exige - New Front</button>
       </div><br>
 
       <span class="blue">Partie Collaborer :</span>
@@ -196,62 +169,61 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
       <div>
         <button class="button">&nbsp;</button>
       </div><br>
-      
-      <br><strong>AC 8 : </strong>Identifier les enjeux de l’économie de l’innovation numérique
+
+      <br><strong>AC 8 : </strong>Identifier les enjeux de l'économie de l'innovation numérique
       <br>
       <br>
       <p><strong>Composante essentielle liée</strong> :</p>
       <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6.01 - Inscrire ma démarche au sein d'une équipe pluridisciplinaire</p>
       <br>
       <p>Cet apprentissage critique a été vu au travers de mon alternance au sein de la société LUNDI MATIN.</p>
-      <p>Cette société édite un ERP nommé “LundiMatinBusiness”.</p>
+      <p>Cette société édite un ERP nommé "LundiMatinBusiness".</p>
       <br>
       <div class="image-container img-group-6">
         <img src="assets/lundimatin-business.svg" alt="Image lm">
       </div>
       <br>
       <p>Un système ERP (Enterprise resource planning) est un logiciel que les entreprises utilisent pour gérer leurs activités quotidiennes telles que la comptabilité, les achats, la gestion de projets, la gestion des risques, la conformité, ainsi que les opérations de supply chain.</p>
-      <p>De nos jours, un ERP est une solution informatisée globale et intégrée en entreprise. Mais cela n’a pas toujours été le cas. D’une gestion papier en passant par des tableurs pilotés manuellement, l’économie fonctionnait au rythme de l’homme.</p>
-      <p>L’innovation numérique a totalement changé le concept de gestion, tout est intégré, tout est accessible en temps réel. Les nouveaux ERP intègrent du prédictif permettant de prendre des décisions stratégiques.</p>
-      <p>Ma fonction de maintenancier au sein des équipes de LundiMatinBusiness chez LUNDI MATIN m’a permis d’être un intervenant actif de la digitalisation de la gestion d’entreprise.</p>
-      
+      <p>De nos jours, un ERP est une solution informatisée globale et intégrée en entreprise. Mais cela n'a pas toujours été le cas. D'une gestion papier en passant par des tableurs pilotés manuellement, l'économie fonctionnait au rythme de l'homme.</p>
+      <p>L'innovation numérique a totalement changé le concept de gestion, tout est intégré, tout est accessible en temps réel. Les nouveaux ERP intègrent du prédictif permettant de prendre des décisions stratégiques.</p>
+      <p>Ma fonction de maintenancier au sein des équipes de LundiMatinBusiness chez LUNDI MATIN m'a permis d'être un intervenant actif de la digitalisation de la gestion d'entreprise.</p>
       <br>
       <br>
       <p>Niveau d'acquisition : 3</p>
       <br>
       <div>
-        <button class="button" onclick="location.href='/details/3'">Alternance 2023-24</button>
+        <button class="button" [routerLink]="['/details', 7]">Alternance LUNDI MATIN</button>
       </div><br>
 
-      <br><strong>AC 9 : </strong>Guider la conduite du changement informatique au sein d’une organisation
+      <br><strong>AC 9 : </strong>Guider la conduite du changement informatique au sein d'une organisation
       <br>
       <br>
       <p><strong>Composante essentielle liée</strong> :</p>
       <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;6.02 - Accompagner la mise en œuvre des évolutions informatiques</p>
       <br>
       <p>Lors de mon alternance chez LUNDI MATIN, j'ai réalisé une analyse critique de son environnement technique. En procédant à la manière d'un audit, j'ai pu faire des suggestions d'amélioration.</p>
-        <br>
+      <br>
       <div class="image-container img-group-7">
         <img src="assets/LundiMatin.webp" alt="image lm">
       </div>
-        <br>
-      <p>Les logiciels développés chez LUNDI MATIN sont soumis à de nombreux « tests unitaires » et « tests utilisateurs », permettant de s’assurer du bon fonctionnement de ces derniers. Ainsi, lorsqu’une fonctionnalité nouvellement réalisée vient à ne pas passer les tests, elle est immédiatement envoyée à la maintenance pour analyse du bug et développement du correctif.</p>
+      <br>
+      <p>Les logiciels développés chez LUNDI MATIN sont soumis à de nombreux « tests unitaires » et « tests utilisateurs », permettant de s'assurer du bon fonctionnement de ces derniers. Ainsi, lorsqu'une fonctionnalité nouvellement réalisée vient à ne pas passer les tests, elle est immédiatement envoyée à la maintenance pour analyse du bug et développement du correctif.</p>
       <p>Ce fonctionnement tend à passer la charge de contrôle du développeur vers le maintenancier.</p>
       <br>
-      <p>L’amélioration que j’ai proposée, dans le cadre de cette alternance et présentée en soutenance, est de faire réaliser une partie des tests par le développeur comme travail préparatoire avant mise en production.</p>
+      <p>L'amélioration que j'ai proposée, dans le cadre de cette alternance et présentée en soutenance, est de faire réaliser une partie des tests par le développeur comme travail préparatoire avant mise en production.</p>
       <br>
-      <p>La réalisation de tests fonctionnels par les développeurs permettrait d’augmenter la qualité de développement qui part en production. Elle allégerait l'activité des équipes de maintenance et permettrait par conséquent une charge de travail plus équilibrée. Il en résulterait moins de bug chez les clients.</p>
+      <p>La réalisation de tests fonctionnels par les développeurs permettrait d'augmenter la qualité de développement qui part en production. Elle allégerait l'activité des équipes de maintenance et permettrait par conséquent une charge de travail plus équilibrée. Il en résulterait moins de bug chez les clients.</p>
       <br>
-      <p>Ma première étape, pour diminuer le nombre de bugs “simples” chez les maintenanciers, a été de rajouter une étape de tests fonctionnels chez les développeurs.</p>
-      <p>Dans un second temps, j’ai proposé de détacher un membre de l’équipe maintenance pour aller seconder l’équipe dev dans le cadre de pré-tests. Là encore, cette démarche a permis d’augmenter la qualité des fonctionnalités issues des équipes de dev.</p>
-      <p>Pour suivre l’impact de cette proposition, il a été demandé de mettre en place des routines d’évaluation d’impact, comparant deux périodes de travail similaires : avec et sans la présence du maintenancier auprès du dev.</p>
+      <p>Ma première étape, pour diminuer le nombre de bugs "simples" chez les maintenanciers, a été de rajouter une étape de tests fonctionnels chez les développeurs.</p>
+      <p>Dans un second temps, j'ai proposé de détacher un membre de l'équipe maintenance pour aller seconder l'équipe dev dans le cadre de pré-tests. Là encore, cette démarche a permis d'augmenter la qualité des fonctionnalités issues des équipes de dev.</p>
+      <p>Pour suivre l'impact de cette proposition, il a été demandé de mettre en place des routines d'évaluation d'impact, comparant deux périodes de travail similaires : avec et sans la présence du maintenancier auprès du dev.</p>
       <br>
-      <p>A terme, cette solution devrait permettre d’alléger le nombre de maintenanciers qui pourraient être réassignés aux équipes de dev.</p>
+      <p>A terme, cette solution devrait permettre d'alléger le nombre de maintenanciers qui pourraient être réassignés aux équipes de dev.</p>
       <br>
       <p>Niveau d'acquisition : 3</p>
       <br>
       <div>
-        <button class="button" onclick="location.href='/details/3'">Alternance 2023-24</button>
+        <button class="button" [routerLink]="['/details', 7]">Alternance LUNDI MATIN</button>
       </div><br>
 
       <br><strong>AC 10 : </strong>Accompagner le management de projet informatique
@@ -274,13 +246,10 @@ import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
       <p>Niveau d'acquisition : 4</p>
       <br>
       <div>
-        <button class="button" onclick="location.href='/details/5'">E:cclesia</button>
+        <button class="button" [routerLink]="['/details', 8]">E:cclesia</button>
       </div><br>
     </section>
-
   `,
-    styleUrls: ['./learn.component.css'],
+  styleUrls: ['./learn.component.css'],
 })
-export class LearnComponent {
-
-}
+export class LearnComponent {}

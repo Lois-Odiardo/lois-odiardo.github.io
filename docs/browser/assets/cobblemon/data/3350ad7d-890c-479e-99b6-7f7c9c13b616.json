@@ -4,30 +4,28 @@
   "starterLocked": false,
   "starterSelected": true,
   "starterUUID": "3b44da7c-4855-4261-bdd5-43cb64cfbfc8",
-  "keyItems": [
-    "cobblemon:key_stone"
-  ],
+  "keyItems": [],
   "battleTheme": "cobblemon:battle.pvp.default",
   "extraData": {},
   "advancementData": {
-    "totalCaptureCount": 156,
+    "totalCaptureCount": 167,
     "totalEggsCollected": 0,
     "totalEggsHatched": 0,
-    "totalEvolvedCount": 11,
-    "totalBattleVictoryCount": 176,
+    "totalEvolvedCount": 14,
+    "totalBattleVictoryCount": 205,
     "totalPvPBattleVictoryCount": 0,
-    "totalPvWBattleVictoryCount": 176,
-    "totalPvNBattleVictoryCount": 0,
-    "totalShinyCaptureCount": 10,
-    "totalTradedCount": 10,
+    "totalPvWBattleVictoryCount": 198,
+    "totalPvNBattleVictoryCount": 7,
+    "totalShinyCaptureCount": 12,
+    "totalTradedCount": 13,
     "totalTypeCaptureCounts": {
-      "electric": 6,
-      "normal": 31,
+      "electric": 7,
+      "normal": 34,
       "poison": 10,
       "flying": 23,
       "bug": 15,
-      "psychic": 14,
-      "water": 21,
+      "psychic": 16,
+      "water": 22,
       "dark": 7,
       "ground": 22,
       "rock": 14,
@@ -35,10 +33,10 @@
       "fairy": 12,
       "steel": 9,
       "dragon": 8,
-      "grass": 11,
+      "grass": 15,
       "fire": 7,
       "ghost": 13,
-      "ice": 8
+      "ice": 9
     },
     "totalDefeatedCounts": {
       "cobblemon:golem": 1,
@@ -48,8 +46,8 @@
       "cobblemon:sandshrew": 2,
       "cobblemon:brambleghast": 1,
       "cobblemon:pidgey": 1,
-      "cobblemon:shuppet": 46,
-      "cobblemon:banette": 26,
+      "cobblemon:shuppet": 58,
+      "cobblemon:banette": 29,
       "cobblemon:boldore": 1,
       "cobblemon:wimpod": 1,
       "cobblemon:onix": 1,
@@ -59,7 +57,9 @@
       "cobblemon:gimmighoul": 1,
       "cobblemon:graveler": 1,
       "cobblemon:reshiram": 1,
-      "cobblemon:zekrom": 1
+      "cobblemon:zekrom": 1,
+      "cobblemon:golett": 1,
+      "cobblemon:uxie": 1
     },
     "aspectsCollected": {
       "cobblemon:mareep": [
@@ -185,7 +185,9 @@
         "female"
       ],
       "cobblemon:lurantis": [
-        "female"
+        "female",
+        "male",
+        "alpha"
       ],
       "cobblemon:yamask": [
         "female",
@@ -549,6 +551,51 @@
       "cobblemon:bergmite": [
         "female",
         "male"
+      ],
+      "cobblemon:miltank": [
+        "female",
+        "milkable",
+        "alpha"
+      ],
+      "cobblemon:fomantis": [
+        "female",
+        "male"
+      ],
+      "cobblemon:seadra": [
+        "male"
+      ],
+      "cobblemon:ironbundle": [
+        "genderless"
+      ],
+      "cobblemon:breloom": [
+        "male"
+      ],
+      "cobblemon:bunnelby": [
+        "shiny",
+        "male"
+      ],
+      "cobblemon:centiskorch": [
+        "shiny",
+        "male"
+      ],
+      "cobblemon:terapagos": [
+        "female",
+        "terastal-form"
+      ],
+      "cobblemon:cresselia": [
+        "female"
+      ],
+      "cobblemon:uxie": [
+        "shiny",
+        "genderless"
+      ],
+      "cobblemon:plusle": [
+        "female",
+        "alpha"
+      ],
+      "cobblemon:wobbuffet": [
+        "shiny",
+        "female"
       ]
     }
   }

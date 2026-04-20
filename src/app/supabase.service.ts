@@ -3,6 +3,7 @@ import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { from, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Project } from './project';
+import { environment } from '../environments/environment';
 
 // Interface pour la BDD (snake_case)
 interface ProjectDB {
@@ -37,22 +38,18 @@ export interface ObjectifsThematiques {
     difficulte3: string;
 }
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class SupabaseService {
     private supabase: SupabaseClient;
 
     constructor() {
-        const supabaseUrl = 'https://gfollhdrysljdgsammcn.supabase.co'; // Remplacez par votre vraie URL
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imdmb2xsaGRyeXNsamRnc2FtbWNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjE2Mzc5NDMsImV4cCI6MjA3NzIxMzk0M30.twyTwEypUrE_S75-uiT4C-sG_rKhxXEw-DLpKvOTBrA'; // Clé publique "anon" (safe côté client)
-
-        this.supabase = createClient(supabaseUrl, supabaseKey, {
+        // Credentials lus depuis environment — plus de valeurs en dur
+        this.supabase = createClient(environment.supabaseUrl, environment.supabaseKey, {
             auth: {
-                persistSession: false, // Désactive la persistance de session (évite les locks)
+                persistSession: false,
                 autoRefreshToken: false,
-                detectSessionInUrl: false
-            }
+                detectSessionInUrl: false,
+            },
         });
     }
 

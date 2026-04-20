@@ -1,10 +1,10 @@
-import {Component, inject} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-home',
-  imports: [CommonModule, RouterModule],
+  standalone: true,
+  imports: [RouterLink],
   template: `
     <section class="presentation-container">
       <div class="presentation-content">
@@ -18,10 +18,7 @@ import { RouterModule } from '@angular/router';
         </p>
       </div>
     </section>
-
   `,
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent {
-
-}
+export class HomeComponent {}
