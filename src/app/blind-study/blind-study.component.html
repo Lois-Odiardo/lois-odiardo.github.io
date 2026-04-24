@@ -1,0 +1,119 @@
+<div class="bs-wrapper">
+    <div class="bs-decorative bs-deco-1"></div>
+    <div class="bs-decorative bs-deco-2"></div>
+    <div class="bs-decorative bs-deco-3"></div>
+
+    <div class="bs-content">
+
+        @if (appState() === 'setup') {
+            <div class="bs-card">
+                <div class="bs-setup">
+                    <div class="bs-logo">
+                        <div class="bs-logo-icon-wrap">
+                            <span class="bs-emoji">🎵</span>
+                            <span class="bs-ping"></span>
+                        </div>
+                        <h1 class="bs-title">BlindStudy</h1>
+                        <p class="bs-subtitle">Teste ta connaissance des musiques d'anime</p>
+                    </div>
+
+                    <div class="bs-filters">
+                        <label class="bs-pill" [class.bs-pill-op]="includeOpenings()">
+                            <input type="checkbox" [checked]="includeOpenings()" (change)="includeOpenings.set(!includeOpenings())">
+                            @if (includeOpenings()) { <span>✓</span> }
+                            Openings
+                        </label>
+                        <label class="bs-pill" [class.bs-pill-ed]="includeEndings()">
+                            <input type="checkbox" [checked]="includeEndings()" (change)="includeEndings.set(!includeEndings())">
+                            @if (includeEndings()) { <span>✓</span> }
+                            Endings
+                        </label>
+                        <label class="bs-pill" [class.bs-pill-in]="includeInserts()">
+                            <input type="checkbox" [checked]="includeInserts()" (change)="includeInserts.set(!includeInserts())">
+                            @if (includeInserts()) { <span>✓</span> }
+                            Inserts
+                        </label>
+                    </div>
+
+                    <button class="bs-btn-launch" [disabled]="!canStart()" (click)="start()">
+                        Lancer
+                    </button>
+                </div>
+            </div>
+        }
+
+        @if (appState() === 'loading') {
+            <div class="bs-card">
+                <div class="bs-loading">
+                    <div class="bs-spinner-wrap">
+                        <div class="bs-spinner"></div>
+                        <span class="bs-spinner-emoji">🎶</span>
+                    </div>
+                    <p class="bs-loading-msg">{{ loadingMessage() }}</p>
+                </div>
+            </div>
+        }
+
+        @if (appState() === 'error') {
+            <div class="bs-card bs-card-error">
+                <div class="bs-error">
+                    <span class="bs-error-emoji">😢</span>
+                    <p class="bs-error-msg">{{ errorMessage() }}</p>
+                    <button class="bs-btn-back" (click)="appState.set('setup')">Retour</button>
+                </div>
+            </div>
+        }
+
+        @if (appState() === 'playing' && currentSong()) {
+            <div class="bs-card">
+                <div class="bs-player">
+
+                    <div class="bs-track-info" [class.bs-track-revealed]="isRevealed()">
+                        @if (isRevealed()) {
+                            <div class="bs-revealed">
+                                <span class="bs-type-badge">{{ currentSong()!.type }}</span>
+                                <h2 class="bs-song-title">{{ currentSong()!.songTitle }}</h2>
+                                <p class="bs-song-artist">{{ currentSong()!.artist }}</p>
+                                <p class="bs-anime-name">{{ currentSong()!.animeName }}</p>
+                            </div>
+                        } @else {
+                            <div class="bs-hidden">
+                                <div class="bs-bars" [class.bs-bars-playing]="isPlaying()">
+                                    <span></span><span></span><span></span><span></span><span></span>
+                                </div>
+                                <p class="bs-mystery">???</p>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="bs-progress-bar">
+                        <div class="bs-progress-fill" [style.width.%]="progress()"></div>
+                    </div>
+
+                    <div class="bs-controls">
+                        @if (!isRevealed()) {
+                            <button class="bs-btn-reveal" (click)="reveal()">Révéler</button>
+                        }
+                        <button class="bs-btn-next" [disabled]="isTransitioning" (click)="nextSong()">
+                            Suivant →
+                        </button>
+                    </div>
+
+                    <p class="bs-counter">{{ currentIndex() + 1 }} / {{ playlist().length }}</p>
+                </div>
+            </div>
+        }
+
+        @if (appState() === 'finished') {
+            <div class="bs-card">
+                <div class="bs-finished">
+                    <span class="bs-finished-emoji">🎉</span>
+                    <h2 class="bs-finished-title">Playlist terminée !</h2>
+                    <p class="bs-finished-count">{{ playlist().length }} musiques jouées</p>
+                    <button class="bs-btn-launch" (click)="restart()">Recommencer</button>
+                </div>
+            </div>
+        }
+
+    </div>
+</div>
