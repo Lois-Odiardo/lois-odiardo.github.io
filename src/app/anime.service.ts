@@ -40,7 +40,7 @@ export interface RelatedAnime {
     providedIn: 'root'
 })
 export class AnimeService {
-    private readonly CORS_PROXY = 'https://api.codetabs.com/v1/proxy/?quest=';
+    private readonly CORS_PROXY = 'https://corsproxy.io/?';
     private readonly API_BASE_URL = 'https://api.myanimelist.net/v2';
     private clientIdSubject = new BehaviorSubject<string | null>(null);
 
