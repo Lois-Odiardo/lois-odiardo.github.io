@@ -12,13 +12,25 @@ RUN npm install
 COPY . .
 RUN npm run build -- --configuration production
 
+# Le build sort dans /app/docs (config GitHub Pages).
+# On determine le dossier contenant index.html et on le copie dans /dist-final.
+RUN if [ -f /app/docs/index.html ]; then \
+        cp -r /app/docs /dist-final; \
+    elif [ -f /app/docs/browser/index.html ]; then \
+        cp -r /app/docs/browser /dist-final; \
+    elif [ -f /app/dist/first-app/browser/index.html ]; then \
+        cp -r /app/dist/first-app/browser /dist-final; \
+    else \
+        echo "ERREUR: index.html introuvable" && find /app -name index.html && exit 1; \
+    fi
+
 # ===== Etape 2 : service via Nginx =====
 FROM nginx:stable-alpine
 
 # Config Nginx pour une SPA Angular (routes -> index.html)
 COPY nginx-spa.conf /etc/nginx/conf.d/default.conf
 
-# Le build Angular sort dans dist/first-app/browser (cf angular.json)
-COPY --from=build /app/dist/first-app/browser /usr/share/nginx/html
+# Le build Angular (dossier determine a l'etape precedente)
+COPY --from=build /dist-final /usr/share/nginx/html
 
 EXPOSE 80
