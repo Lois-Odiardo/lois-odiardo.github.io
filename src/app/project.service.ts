@@ -1,24 +1,24 @@
 import { Injectable, inject } from '@angular/core';
 import { Observable, map } from 'rxjs';
-import { SupabaseService } from './supabase.service';
+import { ApiService } from './api.service';
 import { Project } from './project';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProjectService {
-  private supabaseService = inject(SupabaseService);
+  private apiService = inject(ApiService);
 
   getAllProjects(): Observable<Project[]> {
-    return this.supabaseService.getAllProjects();
+    return this.apiService.getAllProjects();
   }
 
   getProjectById(id: number): Observable<Project | null> {
-    return this.supabaseService.getProjectById(id);
+    return this.apiService.getProjectById(id);
   }
 
   getProjectsByCategory(category: string): Observable<Project[]> {
-    return this.supabaseService.getProjectsByCategory(category);
+    return this.apiService.getProjectsByCategory(category);
   }
 
   getProjectsByState(state: string): Observable<Project[]> {

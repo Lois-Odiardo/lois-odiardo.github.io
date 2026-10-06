@@ -1,8 +1,9 @@
 import { Component, inject, signal, computed, OnDestroy } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
-import { SupabaseService } from '../supabase.service';
+import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 import { filter } from 'rxjs/operators';
+import { environment } from '../../environments/environment';
 
 type AppState = 'setup' | 'loading' | 'playing' | 'error' | 'finished';
 
@@ -40,6 +41,11 @@ interface ATResponse {
     anime?: ATAnime[];
 }
 
+// Reponse du backend pour la liste d'anime d'un utilisateur (champ id)
+interface MalUserListResponse {
+    data?: Array<{ node: { id: number } }>;
+}
+
 @Component({
     selector: 'app-blind-study',
     standalone: true,
@@ -48,11 +54,10 @@ interface ATResponse {
     styleUrls: ['./blind-study.component.css']
 })
 export class BlindStudyComponent implements OnDestroy {
-    private supabaseService = inject(SupabaseService);
+    private http = inject(HttpClient);
     private router = inject(Router);
 
-    private readonly MAL_BASE = 'https://api.myanimelist.net/v2';
-    private readonly CORS_PROXY = 'https://corsproxy.io/?';
+    private readonly api = environment.apiUrl;
     private readonly AT_BASE = 'https://api.animethemes.moe';
     private readonly USERNAME = 'Lothi13';
 
@@ -111,12 +116,8 @@ export class BlindStudyComponent implements OnDestroy {
         this.appState.set('loading');
 
         try {
-            this.loadingMessage.set('Connexion à MyAnimeList...');
-            const clientId = await firstValueFrom(this.supabaseService.getConfig('myanimelist_client_id'));
-            if (!clientId) throw new Error('Client ID MyAnimeList introuvable.');
-
             this.loadingMessage.set('Chargement de la liste d\'animés...');
-            const malIds = await this.fetchMalIds(clientId);
+            const malIds = await this.fetchMalIds();
             if (malIds.length === 0) throw new Error('Aucun animé trouvé dans la liste.');
 
             const songs = await this.fetchSongs(malIds);
@@ -142,17 +143,16 @@ export class BlindStudyComponent implements OnDestroy {
         }
     }
 
-    private async fetchMalIds(clientId: string): Promise<number[]> {
+    // Recupere les IDs d'anime via le backend (proxy MAL), pour les statuts
+    // "completed" et "watching". Plus d'appel direct a MAL ni de cle cote front.
+    private async fetchMalIds(): Promise<number[]> {
         const ids = new Set<number>();
 
         for (const status of ['completed', 'watching']) {
             try {
-                const malUrl = `${this.MAL_BASE}/users/${this.USERNAME}/animelist?status=${status}&fields=id&limit=1000`;
-                const res = await fetch(`${this.CORS_PROXY}${encodeURIComponent(malUrl)}`, {
-                    headers: { 'X-MAL-CLIENT-ID': clientId }
-                });
-                const data = await res.json();
-                (data.data ?? []).forEach((item: { node: { id: number } }) => ids.add(item.node.id));
+                const url = `${this.api}/anime/user-list/${encodeURIComponent(this.USERNAME)}?status=${status}`;
+                const data = await firstValueFrom(this.http.get<MalUserListResponse>(url));
+                (data.data ?? []).forEach(item => ids.add(item.node.id));
             } catch {
                 console.warn(`Impossible de charger la liste "${status}"`);
             }

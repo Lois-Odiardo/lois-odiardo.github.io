@@ -1,6 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SupabaseService, ObjectifsThematiques } from '../supabase.service';
+import { ApiService, ObjectifsThematiques } from '../api.service';
 
 @Component({
     selector: 'app-everyone-john',
@@ -106,9 +106,9 @@ import { SupabaseService, ObjectifsThematiques } from '../supabase.service';
     styleUrls: ['./everyone-john.component.css']
 })
 export class EveryoneJohnComponent implements OnInit {
-    private supabaseService = inject(SupabaseService);
+    private apiService = inject(ApiService);
 
-    // Cache des objectifs chargés depuis Supabase
+    // Cache des objectifs chargés depuis l'API
     private objectifsDifficulte1: string[] = [];
     private objectifsDifficulte2: string[] = [];
     private objectifsDifficulte3: string[] = [];
@@ -135,26 +135,26 @@ export class EveryoneJohnComponent implements OnInit {
         this.loading = true;
 
         // Charger tous les objectifs aléatoires
-        this.supabaseService.getObjectifsByDifficulte(1, false).subscribe({
+        this.apiService.getObjectifsByDifficulte(1, false).subscribe({
             next: (objectifs) => {
                 this.objectifsDifficulte1 = objectifs.map(o => o.objectif);
             }
         });
 
-        this.supabaseService.getObjectifsByDifficulte(2, false).subscribe({
+        this.apiService.getObjectifsByDifficulte(2, false).subscribe({
             next: (objectifs) => {
                 this.objectifsDifficulte2 = objectifs.map(o => o.objectif);
             }
         });
 
-        this.supabaseService.getObjectifsByDifficulte(3, false).subscribe({
+        this.apiService.getObjectifsByDifficulte(3, false).subscribe({
             next: (objectifs) => {
                 this.objectifsDifficulte3 = objectifs.map(o => o.objectif);
             }
         });
 
         // Charger les thèmes disponibles
-        this.supabaseService.getThemes().subscribe({
+        this.apiService.getThemes().subscribe({
             next: (themes) => {
                 this.themes = themes;
                 this.loading = false;
@@ -171,13 +171,13 @@ export class EveryoneJohnComponent implements OnInit {
 
         if (thematique) {
             // Tirer un thème aléatoire
-            const themeAleatoire = this.supabaseService.getRandomElement(this.themes);
+            const themeAleatoire = this.apiService.getRandomElement(this.themes);
             if (!themeAleatoire) return;
 
             this.themeActuel = themeAleatoire;
 
             // Charger les objectifs de ce thème
-            this.supabaseService.getObjectifsByTheme(themeAleatoire).subscribe({
+            this.apiService.getObjectifsByTheme(themeAleatoire).subscribe({
                 next: (objectifs) => {
                     if (objectifs) {
                         this.objectifsTires = {
