@@ -8,11 +8,15 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
-# Puis le code, et build de production
+# Puis le code
 COPY . .
-RUN npm run build -- --configuration production
 
-# Le build sort dans /app/docs (config GitHub Pages).
+# Build direct via le CLI Angular (on evite le script "build" du package.json
+# qui contient une commande Windows "copy" incompatible Linux).
+# --base-href "/" car servi a la racine du domaine (pas de sous-dossier).
+RUN npx ng build --configuration production --base-href "/"
+
+# Le build sort dans /app/docs (outputPath configure pour GitHub Pages).
 # On determine le dossier contenant index.html et on le copie dans /dist-final.
 RUN if [ -f /app/docs/index.html ]; then \
         cp -r /app/docs /dist-final; \
