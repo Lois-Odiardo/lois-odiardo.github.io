@@ -1,0 +1,7 @@
+# On ne copie pas ces dossiers dans l'image : ils seront regeneres dans le build
+node_modules
+dist
+.angular
+.git
+.idea
+*.log
