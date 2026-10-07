@@ -72,9 +72,9 @@
                         @if (isRevealed()) {
                             <div class="bs-revealed">
                                 <span class="bs-type-badge">{{ currentSong()!.type }}</span>
-                                <h2 class="bs-song-title">{{ currentSong()!.songTitle }}</h2>
-                                <p class="bs-song-artist">{{ currentSong()!.artist }}</p>
-                                <p class="bs-anime-name">{{ currentSong()!.animeName }}</p>
+                                <h2 class="bs-reveal-anime">{{ currentSong()!.animeName }}</h2>
+                                <p class="bs-reveal-song">{{ currentSong()!.songTitle }}</p>
+                                <p class="bs-reveal-artist">{{ currentSong()!.artist }}</p>
                             </div>
                         } @else {
                             <div class="bs-hidden">
