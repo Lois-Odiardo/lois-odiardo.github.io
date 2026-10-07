@@ -1,51 +1,32 @@
 import { Component, inject, signal, computed, OnDestroy } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router, NavigationStart } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 
 type AppState = 'setup' | 'loading' | 'playing' | 'error' | 'finished';
 
+// Une musique renvoyee par le backend (GET /api/blindtest/songs)
 interface AnimeThemeSong {
     animeName: string;
-    type: string;
+    type: string;      // ex. "OP1", "ED2", "IN"
     songTitle: string;
     artist: string;
     audioUrl: string;
 }
 
-interface ATVideo {
-    audio?: { link: string };
-}
-
-interface ATEntry {
-    videos?: ATVideo[];
-}
-
-interface ATTheme {
-    slug?: string;
-    song?: {
-        title?: string;
-        artists?: { name: string }[];
-    };
-    animethemeentries?: ATEntry[];
-}
-
-interface ATAnime {
-    name: string;
-    animethemes?: ATTheme[];
-}
-
-interface ATResponse {
-    anime?: ATAnime[];
-}
-
-// Reponse du backend pour la liste d'anime d'un utilisateur (champ id)
-interface MalUserListResponse {
-    data?: Array<{ node: { id: number } }>;
-}
-
+/**
+ * PERFORMANCE :
+ *  - AVANT : le navigateur interrogeait AnimeThemes anime par anime (des centaines
+ *    de requetes a la suite) -> plusieurs minutes d'attente.
+ *  - MAINTENANT : la playlist est preparee et mise en cache par le backend ;
+ *    un seul appel suffit. Elle est aussi gardee en memoire pour la visite :
+ *    "Recommencer" ne la retelecharge pas.
+ *  - La musique suivante est pre-chargee pendant qu'on ecoute la musique
+ *    actuelle -> "Suivant" demarre quasiment sans attente.
+ */
 @Component({
     selector: 'app-blind-study',
     standalone: true,
@@ -58,8 +39,9 @@ export class BlindStudyComponent implements OnDestroy {
     private router = inject(Router);
 
     private readonly api = environment.apiUrl;
-    private readonly AT_BASE = 'https://api.animethemes.moe';
-    private readonly USERNAME = 'Lothi13';
+
+    // Playlist complete gardee entre deux parties (meme visite)
+    private static songsCache: AnimeThemeSong[] | null = null;
 
     appState = signal<AppState>('setup');
     includeOpenings = signal(true);
@@ -80,47 +62,70 @@ export class BlindStudyComponent implements OnDestroy {
     isPlaying = signal(false);
     isTransitioning = false;
 
-    private audio = new Audio();
+    // Deux lecteurs : l'un joue, l'autre pre-charge la musique suivante.
+    // A chaque "Suivant", on echange leurs roles.
+    private audio = this.createAudio();
+    private nextAudio = this.createAudio();
+    private nextAudioUrl: string | null = null;
 
     isNavigating = false;
 
     constructor() {
-        this.audio.addEventListener('timeupdate', () => {
-            const { currentTime, duration } = this.audio;
-            this.progress.set(isFinite(duration) && duration > 0 ? (currentTime / duration) * 100 : 0);
-        });
-        this.audio.addEventListener('ended', () => {
-            if (!this.isNavigating) this.nextSong();
-        });
-        this.audio.addEventListener('error', () => {
-            if (!this.isNavigating) this.nextSong();
-        });
-        this.audio.addEventListener('playing', () => this.isPlaying.set(true));
-        this.audio.addEventListener('pause', () => this.isPlaying.set(false));
-
         this.router.events.pipe(
-            filter(e => e instanceof NavigationStart)
+            filter(e => e instanceof NavigationStart),
+            takeUntilDestroyed() // se desabonne quand on quitte la page
         ).subscribe(() => {
             this.isNavigating = true;
-            this.audio.pause();
-            this.audio.src = '';
+            this.stopAll();
         });
     }
 
     ngOnDestroy(): void {
-        this.audio.pause();
-        this.audio.src = '';
+        this.stopAll();
+    }
+
+    // Cree un lecteur audio. Ses evenements ne sont pris en compte que
+    // s'il est le lecteur actif (pas celui qui pre-charge).
+    private createAudio(): HTMLAudioElement {
+        const a = new Audio();
+        a.preload = 'auto';
+
+        a.addEventListener('timeupdate', () => {
+            if (a !== this.audio) return;
+            const { currentTime, duration } = a;
+            this.progress.set(isFinite(duration) && duration > 0 ? (currentTime / duration) * 100 : 0);
+        });
+        a.addEventListener('ended', () => {
+            if (a === this.audio && !this.isNavigating) this.nextSong();
+        });
+        a.addEventListener('error', () => {
+            if (a === this.audio && !this.isNavigating && this.appState() === 'playing') this.nextSong();
+        });
+        a.addEventListener('playing', () => {
+            if (a === this.audio) this.isPlaying.set(true);
+        });
+        a.addEventListener('pause', () => {
+            if (a === this.audio) this.isPlaying.set(false);
+        });
+        return a;
+    }
+
+    private stopAll(): void {
+        for (const a of [this.audio, this.nextAudio]) {
+            a.pause();
+            a.removeAttribute('src');
+            a.load();
+        }
+        this.nextAudioUrl = null;
     }
 
     async start(): Promise<void> {
+        this.isNavigating = false;
         this.appState.set('loading');
 
         try {
-            this.loadingMessage.set('Chargement de la liste d\'animés...');
-            const malIds = await this.fetchMalIds();
-            if (malIds.length === 0) throw new Error('Aucun animé trouvé dans la liste.');
-
-            const songs = await this.fetchSongs(malIds);
+            const songs = await this.fetchSongs();
+            if (songs.length === 0) throw new Error('Aucune musique trouvée.');
 
             const filtered = songs.filter(s => {
                 const type = s.type.toLowerCase();
@@ -143,68 +148,25 @@ export class BlindStudyComponent implements OnDestroy {
         }
     }
 
-    // Recupere les IDs d'anime via le backend (proxy MAL), pour les statuts
-    // "completed" et "watching". Plus d'appel direct a MAL ni de cle cote front.
-    private async fetchMalIds(): Promise<number[]> {
-        const ids = new Set<number>();
-
-        for (const status of ['completed', 'watching']) {
-            try {
-                const url = `${this.api}/anime/user-list/${encodeURIComponent(this.USERNAME)}?status=${status}`;
-                const data = await firstValueFrom(this.http.get<MalUserListResponse>(url));
-                (data.data ?? []).forEach(item => ids.add(item.node.id));
-            } catch {
-                console.warn(`Impossible de charger la liste "${status}"`);
-            }
+    // Un seul appel au backend, qui renvoie la playlist deja prete.
+    private async fetchSongs(): Promise<AnimeThemeSong[]> {
+        if (BlindStudyComponent.songsCache) {
+            return BlindStudyComponent.songsCache;
         }
 
-        return [...ids];
-    }
-
-    private async fetchSongs(malIds: number[]): Promise<AnimeThemeSong[]> {
-        const all: AnimeThemeSong[] = [];
-
-        for (let i = 0; i < malIds.length; i++) {
-            this.loadingMessage.set(`Musiques : ${i + 1} / ${malIds.length} animés traités...`);
-
-            try {
-                const url = `${this.AT_BASE}/anime?filter[has]=resources&filter[site]=MyAnimeList&filter[external_id]=${malIds[i]}&include=animethemes.animethemeentries.videos.audio,animethemes.song.artists`;
-                const res = await fetch(url);
-                if (!res.ok) continue;
-
-                const data: ATResponse = await res.json();
-
-                for (const anime of data.anime ?? []) {
-                    for (const theme of anime.animethemes ?? []) {
-                        const songTitle: string = theme.song?.title ?? '???';
-                        const artist: string = (theme.song?.artists ?? [])
-                            .map((a: { name: string }) => a.name)
-                            .join(', ') || '???';
-                        const type: string = theme.slug ?? '???';
-
-                        let audioUrl: string | null = null;
-                        outer: for (const entry of theme.animethemeentries ?? []) {
-                            for (const video of entry.videos ?? []) {
-                                if (video.audio?.link) {
-                                    audioUrl = video.audio.link;
-                                    break outer;
-                                }
-                            }
-                        }
-
-                        if (audioUrl) {
-                            all.push({ animeName: anime.name, type, songTitle, artist, audioUrl });
-                        }
-                    }
-                }
-            } catch {
-                console.warn(`Erreur pour MAL ID: ${malIds[i]}`);
+        this.loadingMessage.set('Chargement des musiques...');
+        try {
+            const songs = await firstValueFrom(
+                this.http.get<AnimeThemeSong[]>(`${this.api}/blindtest/songs`)
+            );
+            BlindStudyComponent.songsCache = songs ?? [];
+            return BlindStudyComponent.songsCache;
+        } catch (err) {
+            if (err instanceof HttpErrorResponse && err.status === 503) {
+                throw new Error('La playlist est en cours de préparation, réessaie dans une minute.');
             }
-
-            await new Promise(resolve => setTimeout(resolve, 100));
+            throw new Error('Impossible de charger les musiques.');
         }
-
-        return all;
     }
 
     private shuffle<T>(arr: T[]): T[] {
@@ -221,11 +183,44 @@ export class BlindStudyComponent implements OnDestroy {
         if (!song) { this.appState.set('finished'); return; }
         this.isRevealed.set(false);
         this.progress.set(0);
-        this.audio.src = song.audioUrl;
-        this.audio.load();
-        this.audio.play()
-            .catch(() => this.nextSong())
-            .finally(() => { this.isTransitioning = false; });
+
+        if (this.nextAudioUrl === song.audioUrl) {
+            // La musique a deja ete pre-chargee : on echange les lecteurs.
+            const previous = this.audio;
+            this.audio = this.nextAudio;
+            this.nextAudio = previous;
+            previous.pause();
+        } else {
+            this.audio.src = song.audioUrl;
+            this.audio.load();
+        }
+        this.nextAudioUrl = null;
+
+        const player = this.audio;
+        player.play()
+            .then(() => {
+                if (player === this.audio) this.isTransitioning = false;
+            })
+            .catch((err: unknown) => {
+                if (player !== this.audio) return; // un autre morceau a pris le relais
+                this.isTransitioning = false;
+                // On ignore les lectures interrompues volontairement (Recommencer,
+                // changement de page) : seule une vraie erreur fait passer a la suite.
+                const aborted = err instanceof DOMException && err.name === 'AbortError';
+                if (aborted || this.isNavigating || this.appState() !== 'playing') return;
+                this.nextSong();
+            });
+
+        this.preloadNext();
+    }
+
+    // Commence a telecharger la musique suivante dans le lecteur inactif.
+    private preloadNext(): void {
+        const next = this.playlist()[this.currentIndex() + 1];
+        if (!next) return;
+        this.nextAudio.src = next.audioUrl;
+        this.nextAudio.load();
+        this.nextAudioUrl = next.audioUrl;
     }
 
     nextSong(): void {
@@ -247,7 +242,7 @@ export class BlindStudyComponent implements OnDestroy {
     }
 
     restart(): void {
-        this.audio.pause();
+        this.stopAll();
         this.playlist.set([]);
         this.currentIndex.set(0);
         this.isRevealed.set(false);
